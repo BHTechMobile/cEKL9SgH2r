@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="aDA-CQ-bv3">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="vhx-gr-THs">
+            <objects>
+                <navigationController id="aDA-CQ-bv3" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="p2g-SB-RcS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Gr1-kM-KOS" kind="relationship" relationship="rootViewController" id="2Kz-wo-7nB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x4o-Am-2cb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-804" y="902"/>
+        </scene>
+        <!--Event List View Controller-->
+        <scene sceneID="Eey-w7-Mem">
+            <objects>
+                <viewController id="Gr1-kM-KOS" customClass="EventListViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ECW-sS-afa"/>
+                        <viewControllerLayoutGuide type="bottom" id="lCE-Om-Xcb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="glU-xd-Ohl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="D4h-aD-ifc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HSA-aM-hnm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--Event Detail View Controller-->
+        <scene sceneID="Vsp-pi-aT9">
+            <objects>
+                <viewController id="Ab7-kU-Ndd" customClass="EventDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ZdI-cF-9IH"/>
+                        <viewControllerLayoutGuide type="bottom" id="5VM-f1-6PH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3vb-VS-Sui">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iiC-oe-ffK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
