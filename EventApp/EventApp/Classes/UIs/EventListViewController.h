@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventListViewController : UIViewController
+@interface EventListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+- (IBAction)refreshListEventsAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UITableView *listEventsTable;
+@property (strong, nonatomic) NSArray *getListEvents;
 
 @end

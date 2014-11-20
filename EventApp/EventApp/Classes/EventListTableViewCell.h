@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface EventListTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *titleEvents;
+@property (weak, nonatomic) IBOutlet UILabel *timeTitleEvents;
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

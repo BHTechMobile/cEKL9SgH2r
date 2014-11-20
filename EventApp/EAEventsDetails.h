@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-
+#import "NSManagedObject+Utilities.h"
 
 @interface EAEventsDetails : NSManagedObject
 
@@ -25,5 +25,16 @@
 @property (nonatomic, retain) NSDate * eventEndTime;
 @property (nonatomic, retain) NSString * contentType;
 @property (nonatomic, retain) NSString * contentDescription;
+
+@end
+
+@interface EAEventsDetails (CoreDataGeneratedAccessors)
+
+- (void)addEvents:(NSSet *)values;
+- (void)removeEvents:(NSSet *)values;
+
++ (EAEventsDetails *)eventListsFromDictionary:(NSDictionary *)dict;
++ (EAEventsDetails *)eventLists;
++ (EAEventsDetails *)eventListsByName:(NSString *)name;
 
 @end

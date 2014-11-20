@@ -10,11 +10,11 @@
 + (NSManagedObject *)managedObjectWithKey:(NSString *)key andValue:(id)value {
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
     
-	[request setEntity:[NSEntityDescription entityForName:[[self class] description] inManagedObjectContext:JTManagedObjectContext]];
+	[request setEntity:[NSEntityDescription entityForName:[[self class] description] inManagedObjectContext:EAManagedObjectContext]];
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"%@ = '%@'", key, value]];
 	[request setPredicate:predicate];
 	NSError *error = nil;
-	NSArray *results = [JTManagedObjectContext executeFetchRequest:request error:&error];
+	NSArray *results = [EAManagedObjectContext executeFetchRequest:request error:&error];
 	NSManagedObject *object = nil;
     
 	if (results != nil) {

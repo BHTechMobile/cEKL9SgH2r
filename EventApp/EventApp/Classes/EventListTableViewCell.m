@@ -1,8 +1,6 @@
 //
 //  EventListTableViewCell.m
 //  EventApp
-//
-//  Created by PhamHuuPhuong on 20/11/14.
 //  Copyright (c) 2014 BHTech Mobile. All rights reserved.
 //
 
@@ -11,13 +9,19 @@
 @implementation EventListTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
+}
 
-    // Configure the view for the selected state
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [[[NSBundle mainBundle] loadNibNamed:[[self class] description] owner:nil options:nil] objectAtIndex:0];
+    if (self) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.timeTitleEvents.textColor = [UIColor grayColor];
+    }
+    return self;
 }
 
 @end
