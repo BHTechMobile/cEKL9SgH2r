@@ -13,6 +13,9 @@
 		9FD409EE1A1DED850062F9C6 /* EventListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD409ED1A1DED850062F9C6 /* EventListModel.m */; };
 		9FD409F11A1DEDAB0062F9C6 /* EventListTableViewCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD409F01A1DEDAB0062F9C6 /* EventListTableViewCellModel.m */; };
 		9FD409F41A1DEDBA0062F9C6 /* EventDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD409F31A1DEDBA0062F9C6 /* EventDetailModel.m */; };
+		9FD409F71A1DF0240062F9C6 /* JSONLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD409F61A1DF0240062F9C6 /* JSONLoader.m */; };
+		9FD409FC1A1DF06A0062F9C6 /* CoreDataHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD409F91A1DF06A0062F9C6 /* CoreDataHelpers.m */; };
+		9FD409FD1A1DF06A0062F9C6 /* NSManagedObject+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FD409FB1A1DF06A0062F9C6 /* NSManagedObject+Utilities.m */; };
 		CE895CCF1A199AA500B0E6BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE895CCE1A199AA500B0E6BB /* main.m */; };
 		CE895CD21A199AA500B0E6BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE895CD11A199AA500B0E6BB /* AppDelegate.m */; };
 		CE895CD51A199AA500B0E6BB /* EventApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE895CD31A199AA500B0E6BB /* EventApp.xcdatamodeld */; };
@@ -48,6 +51,12 @@
 		9FD409F01A1DEDAB0062F9C6 /* EventListTableViewCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListTableViewCellModel.m; sourceTree = SOURCE_ROOT; };
 		9FD409F21A1DEDBA0062F9C6 /* EventDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailModel.h; sourceTree = SOURCE_ROOT; };
 		9FD409F31A1DEDBA0062F9C6 /* EventDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailModel.m; sourceTree = SOURCE_ROOT; };
+		9FD409F51A1DF0240062F9C6 /* JSONLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONLoader.h; sourceTree = SOURCE_ROOT; };
+		9FD409F61A1DF0240062F9C6 /* JSONLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONLoader.m; sourceTree = SOURCE_ROOT; };
+		9FD409F81A1DF06A0062F9C6 /* CoreDataHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelpers.h; sourceTree = SOURCE_ROOT; };
+		9FD409F91A1DF06A0062F9C6 /* CoreDataHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelpers.m; sourceTree = SOURCE_ROOT; };
+		9FD409FA1A1DF06A0062F9C6 /* NSManagedObject+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Utilities.h"; sourceTree = SOURCE_ROOT; };
+		9FD409FB1A1DF06A0062F9C6 /* NSManagedObject+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Utilities.m"; sourceTree = SOURCE_ROOT; };
 		AAC528A196AC02FDC342D5EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE895CC91A199AA400B0E6BB /* EventApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE895CCD1A199AA500B0E6BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -194,6 +203,12 @@
 		CE895CF61A199B0700B0E6BB /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				9FD409F81A1DF06A0062F9C6 /* CoreDataHelpers.h */,
+				9FD409F91A1DF06A0062F9C6 /* CoreDataHelpers.m */,
+				9FD409FA1A1DF06A0062F9C6 /* NSManagedObject+Utilities.h */,
+				9FD409FB1A1DF06A0062F9C6 /* NSManagedObject+Utilities.m */,
+				9FD409F51A1DF0240062F9C6 /* JSONLoader.h */,
+				9FD409F61A1DF0240062F9C6 /* JSONLoader.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -373,8 +388,11 @@
 			files = (
 				CE895CD21A199AA500B0E6BB /* AppDelegate.m in Sources */,
 				CE895D001A199B3800B0E6BB /* EventDetailViewController.m in Sources */,
+				9FD409FC1A1DF06A0062F9C6 /* CoreDataHelpers.m in Sources */,
 				9FD409EE1A1DED850062F9C6 /* EventListModel.m in Sources */,
+				9FD409F71A1DF0240062F9C6 /* JSONLoader.m in Sources */,
 				9FD409F41A1DEDBA0062F9C6 /* EventDetailModel.m in Sources */,
+				9FD409FD1A1DF06A0062F9C6 /* NSManagedObject+Utilities.m in Sources */,
 				9FD409EA1A1DED4D0062F9C6 /* EventListTableViewCell.m in Sources */,
 				CE895CFD1A199B2900B0E6BB /* EventListViewController.m in Sources */,
 				CE895CCF1A199AA500B0E6BB /* main.m in Sources */,
