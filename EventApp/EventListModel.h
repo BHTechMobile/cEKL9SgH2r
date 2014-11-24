@@ -10,4 +10,12 @@
 
 @interface EventListModel : NSObject
 
+@property (nonatomic, retain) NSArray *arrayEvents;
+@property (nonatomic, retain) NSString *createdBy;
+@property (nonatomic, retain) NSString *nameCalendar;
+
+- (void)getJSONfile;
+- (void)fetchedData:(NSData *)responseData;
+- (void)insertData:(NSArray *)arrayEvents;
+    
 @end

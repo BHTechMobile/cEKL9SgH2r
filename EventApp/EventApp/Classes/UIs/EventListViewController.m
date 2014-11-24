@@ -11,6 +11,8 @@
 #import "EAEventsDetails.h"
 #import "AppDelegate.h"
 #import "EventListTableViewCell.h"
+#import "JSONLoader.h"
+#import "EventListModel.h"
 
 @interface EventListViewController ()
 
@@ -21,81 +23,37 @@
     NSArray *arrayEvents;
     EventDetailViewController *eventDetailViewController;
     EAEventsDetails *eaEventsDetails;
+    EventListModel *eventListModel;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getData ];
-    arrayEvents = [[NSArray alloc]init];
-    NSData* data = [NSData dataWithContentsOfURL:ALL_EVENTS_LIST_URL_JSON];
-    [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
+
+    eventListModel = [EventListModel new];
+    [eventListModel getJSONfile];
+    arrayEvents = eventListModel.arrayEvents;
+    [self.listEventsTable reloadData];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.tintColor  = [UIColor redColor];
+    [[[self navigationController] navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor redColor]}];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-- (void)fetchedData:(NSData *)responseData {
-    NSError* error;
-    NSDictionary* json = [NSJSONSerialization
-                          JSONObjectWithData:responseData
-                          options:kNilOptions
-                          error:&error];
-    
-    arrayEvents = [[[[[json objectForKey:@"cids"]objectForKey:@"calendars%40startupdigest.com/private/embed"] objectForKey:@"gdata"] objectForKey:@"feed"] objectForKey:@"entry"];
-    
-    NSLog(@"entry: %@", arrayEvents);
-}
-
-- (void)insertData {
-    for (int i = 0; i < arrayEvents.count; i++) {
-        eaEventsDetails = (EAEventsDetails *)[NSEntityDescription insertNewObjectForEntityForName:@"EAEventsDetails" inManagedObjectContext:EAManagedObjectContext];
-        eaEventsDetails.eventId = [[[arrayEvents objectAtIndex:i] valueForKey:@"id"]valueForKey:@"$t"];
-        eaEventsDetails.contentDescription = [[[arrayEvents objectAtIndex:i] valueForKey:@"content"]valueForKey:@"$t"];
-        eaEventsDetails.contentType = [[[arrayEvents objectAtIndex:i] valueForKey:@"content"]objectForKey:@"type"];
-        eaEventsDetails.titleName = [[[arrayEvents objectAtIndex:i] valueForKey:@"title"]valueForKey:@"$t"];
-        eaEventsDetails.titleType = [[[arrayEvents objectAtIndex:i] valueForKey:@"title"]valueForKey:@"type"];
-        eaEventsDetails.linkRel = [[[[arrayEvents objectAtIndex:i] valueForKey:@"link"]firstObject]valueForKey:@"rel"];
-        eaEventsDetails.linkType = [[[[arrayEvents objectAtIndex:i] valueForKey:@"link"]firstObject]valueForKey:@"type"];
-        eaEventsDetails.linkHref = [[[[arrayEvents objectAtIndex:i] valueForKey:@"link"]firstObject]valueForKey:@"href"];
-        eaEventsDetails.eventWhere = [[[[arrayEvents objectAtIndex:i] valueForKey:@"gd$where"]firstObject]valueForKey:@"valueString"];
-        eaEventsDetails.eventEndTime = [[[[arrayEvents objectAtIndex:i] valueForKey:@"gd$when"]firstObject]valueForKey:@"endTime"];
-        eaEventsDetails.eventStartTime = [[[[arrayEvents objectAtIndex:i] valueForKey:@"gd$when"]firstObject]valueForKey:@"startTime"];
-        
-        NSLog(@"Done %@",eaEventsDetails);
-        
-        NSError *error;
-        if (![EAManagedObjectContext save:&error]) {
-            NSLog(@"Problem saving: %@", [error localizedDescription]);
-        }
-    }
-}
-
-- (void)getData{
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"EAEventsDetails" inManagedObjectContext:EAManagedObjectContext];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    
-    [request setFetchBatchSize:20];
-    [request setEntity:entity];
-    
-    NSError *error;
-    
-    NSArray *results = [[EAManagedObjectContext executeFetchRequest:request error:&error] mutableCopy];
-    [self setGetListEvents:results];
-    [self.listEventsTable reloadData];
-}
-
 #pragma mark - Table View Delegate - Datasource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 45;
+    return 55;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return arrayEvents.count;
-    return _getListEvents.count;
+    return arrayEvents.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -105,21 +63,47 @@
     if (cell == nil) {
         cell = [[EventListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-//    eaEventsDetails = [_getListEvents objectAtIndex:indexPath.row];
-//    NSDateFormatter *_formatter=[[NSDateFormatter alloc]init];
-//    [_formatter setDateFormat:@"dd/MM/yy HH:mm"];
-//    NSString *startTimes = [_formatter stringFromDate:eaEventsDetails.eventStartTime];
-//    NSString *endTimes = [_formatter stringFromDate:eaEventsDetails.eventEndTime];
     
-      cell.titleEvents.text = [[[arrayEvents objectAtIndex:indexPath.row] valueForKey:@"title"]valueForKey:@"$t"];
-//    cell.titleEvents.text = eaEventsDetails.titleName;
-//    cell.timeTitleEvents.text = [NSString stringWithFormat:@"From %@ to %@",startTimes,endTimes];
+    eaEventsDetails = [arrayEvents objectAtIndex:indexPath.row];
+    
+    cell.titleEvents.text = [[[arrayEvents objectAtIndex:indexPath.row] valueForKey:@"title"]valueForKey:@"$t"];
+    
+    
+    // timestamp conversion
+    NSString *endReceivedInString = [[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:@"gd$when"]firstObject] valueForKey:@"endTime"];
+    NSString *startReceivedInString =[[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:@"gd$when"]firstObject] valueForKey:@"startTime"];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS-HH:mm"];
+//    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    
+//    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+//    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+//    [dateFormatter setDoesRelativeDateFormatting:YES];
+    
+    NSDate *dateStringEnd= [dateFormatter dateFromString:[endReceivedInString substringToIndex:10]];
+    NSDate *dateStringStart= [dateFormatter dateFromString:[startReceivedInString substringToIndex:10]];
+    
+    cell.timeTitleEvents.text = [NSString stringWithFormat:@"From %@ to %@",[startReceivedInString substringToIndex:10],[endReceivedInString substringToIndex:10]];
+
+//    cell.timeTitleEvents.text = [NSString stringWithFormat:@"From %@ to %@",dateStringStart,dateStringEnd];
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:@"viewEventDetails" sender:nil];
-    //    eventDetailViewController.navigationItem.title = [[[arrayEvents objectAtIndex:indexPath.row] valueForKey:@"title"]valueForKey:@"$t"];
+    eventDetailViewController.navigationItem.title = [[[arrayEvents objectAtIndex:indexPath.row] valueForKey:@"title"]valueForKey:@"$t"];
+    [eventDetailViewController setEventsTitle:[[[arrayEvents objectAtIndex:indexPath.row] valueForKey:@"title"]valueForKey:@"$t"]];
+    [eventDetailViewController setEventsLocation:[[[[arrayEvents objectAtIndex:indexPath.row] valueForKey:@"gd$where"]firstObject]valueForKey:@"valueString"]];
+    [eventDetailViewController setEventsDescription:[[[arrayEvents objectAtIndex:indexPath.row] valueForKey:@"content"]valueForKey:@"$t"]];
+    
+    [eventDetailViewController setEventsEndTime:[[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:@"gd$when"]firstObject] valueForKey:@"endTime"]];
+    [eventDetailViewController setEventsStartTime:[[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:@"gd$when"]firstObject] valueForKey:@"startTime"]];
+    
+    [eventDetailViewController setEventsCreatedby:eventListModel.createdBy];
+    [eventDetailViewController setEventsCalendar:eventListModel.nameCalendar];
+    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -128,8 +112,8 @@
     }
 }
 
-
 - (IBAction)refreshListEventsAction:(id)sender {
-    [self insertData];
+    [eventListModel insertData:arrayEvents];
 }
+
 @end

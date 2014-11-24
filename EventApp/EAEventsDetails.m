@@ -24,6 +24,8 @@
 @dynamic eventEndTime;
 @dynamic contentType;
 @dynamic contentDescription;
+@dynamic eventCalendarName;
+@dynamic eventCreatedBy;
 
 + (EAEventsDetails *)eventListsFromDictionary:(NSDictionary *)dict {
     EAEventsDetails *managedObject = (EAEventsDetails *)[EAEventsDetails managedObjectWithKey:EAEVENTLIST_KEY_NAME andValue:[dict valueForKey:EAEVENTLIST_KEY_NAME]];

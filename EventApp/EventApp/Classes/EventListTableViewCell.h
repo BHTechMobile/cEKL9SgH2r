@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventListTableViewCell : UITableViewCell
+@interface EventListTableViewCell : UITableViewCell<UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleEvents;
 @property (weak, nonatomic) IBOutlet UILabel *timeTitleEvents;
 

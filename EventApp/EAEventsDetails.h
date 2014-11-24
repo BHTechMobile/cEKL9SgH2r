@@ -25,7 +25,8 @@
 @property (nonatomic, retain) NSDate * eventEndTime;
 @property (nonatomic, retain) NSString * contentType;
 @property (nonatomic, retain) NSString * contentDescription;
-
+@property (nonatomic, retain) NSString * eventCalendarName;
+@property (nonatomic, retain) NSString * eventCreatedBy;
 @end
 
 @interface EAEventsDetails (CoreDataGeneratedAccessors)
