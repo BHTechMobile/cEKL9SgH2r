@@ -36,8 +36,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBar.tintColor  = [UIColor redColor];
-    [[[self navigationController] navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor redColor]}];
+    self.navigationController.navigationBar.tintColor  = MAIN_COLOR;
+    [[[self navigationController] navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName: MAIN_COLOR}];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,9 +75,9 @@
 
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     
-    [formatter setDateFormat:FORMAT_DATE];
-    NSDate *dt = [formatter dateFromString:endReceivedInString];
-    NSDate *dt2 = [formatter dateFromString:startReceivedInString];
+    [formatter setDateFormat:FORMAT_SHORT_DATE];
+    NSDate *dt = [formatter dateFromString:[endReceivedInString substringToIndex:LENGTH_SHORT_DATE_TIME]];
+    NSDate *dt2 = [formatter dateFromString:[startReceivedInString substringToIndex:LENGTH_SHORT_DATE_TIME]];
     
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     NSString *dateAsStringEnd = [formatter stringFromDate:dt];

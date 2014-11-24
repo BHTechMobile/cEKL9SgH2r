@@ -31,29 +31,47 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    self.navigationItem.hidesBackButton = YES;
+    
+    UIImage *backImage = [UIImage imageNamed:@"btn_back_cyan"];
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(0, 0, 15, 20)];
+    [backButton setBackgroundImage:backImage forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:barButton];
+    
+}
+
+- (void)popBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - Table View Delegate - Datasource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 40;
+    CGFloat height = HEIGHT_CELL_DETAIL_EVENT;
     if (indexPath.row == 0){
         EventDetailTableViewCell *cell = (EventDetailTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 5;
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 20;
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT_;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)){
         EventDetailMapTableViewCell *cell = (EventDetailMapTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.contentView.frame.size.height + cell.contentTitle.frame.size.height;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 5;
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0) + ((self.eventsCreatedby.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 5;
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0) + ((self.eventsCreatedby.length > 0)?1:0) + ((self.eventsDescription.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 5;
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
     }
     
     return height;
@@ -89,7 +107,7 @@
         cell.contentDetailEvents.font = [UIFont fontWithName:FONT_HELVETICA_BOLD size:14];
         [cell.contentDetailEvents sizeToFit];
         CGRect textFrame = cell.contentDetailEvents.frame;
-        textFrame.size.width = 290;
+        textFrame.size.width = WIDTH_TITLE_CELL_DETAIL;
         cell.contentDetailEvents.frame = textFrame;
         
         CGRect containerFrame = cell.contentDetailEvents.frame;
@@ -109,18 +127,28 @@
         NSString *startReceivedInString = self.eventsStartTime;
         NSString *endReceivedInString = self.eventsEndTime;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        
-        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS-HH:mm"];
-        NSDate *dt = [formatter dateFromString:endReceivedInString];
-        NSDate *dt2 = [formatter dateFromString:startReceivedInString];
-        
-        [formatter setDateStyle:NSDateFormatterFullStyle];
-        NSString *dateAsStringEnd = [formatter stringFromDate:dt];
-        NSString *dateAsStringStart = [formatter stringFromDate:dt2];
-        
-        NSLog(@"%@ - %@",dateAsStringStart, dateAsStringEnd);
-        
-        cell.contentDescription.text = [NSString stringWithFormat:@"From %@ \n to %@",dateAsStringStart ,dateAsStringEnd];
+        if(self.eventsStartTime.length > LENGTH_SHORT_DATE_TIME){
+            [formatter setDateFormat:FORMAT_DATE];
+            NSDate *dt = [formatter dateFromString:endReceivedInString];
+            NSDate *dt2 = [formatter dateFromString:startReceivedInString];
+            
+            [formatter setDateStyle:NSDateFormatterFullStyle];
+            NSString *dateAsStringEnd = [formatter stringFromDate:dt];
+            NSString *dateAsStringStart = [formatter stringFromDate:dt2];
+            
+            cell.contentDescription.text = [NSString stringWithFormat:@"From %@ \n to %@",dateAsStringStart ,dateAsStringEnd];
+        }
+        else{
+            [formatter setDateFormat:FORMAT_SHORT_DATE];
+            NSDate *dt = [formatter dateFromString:[endReceivedInString substringToIndex:LENGTH_SHORT_DATE_TIME]];
+            NSDate *dt2 = [formatter dateFromString:[startReceivedInString substringToIndex:LENGTH_SHORT_DATE_TIME]];
+            
+            [formatter setDateStyle:NSDateFormatterMediumStyle];
+            NSString *dateAsStringEnd = [formatter stringFromDate:dt];
+            NSString *dateAsStringStart = [formatter stringFromDate:dt2];
+            
+            cell.contentDescription.text = [NSString stringWithFormat:@"From %@ to %@",dateAsStringStart ,dateAsStringEnd];
+        }
 
         [cell.contentDescription sizeToFit];
         CGRect textFrame = cell.contentDescription.frame;

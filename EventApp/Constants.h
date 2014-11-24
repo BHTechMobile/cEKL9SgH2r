@@ -10,9 +10,12 @@
 #define SEGUE_INDENTIFIER @"viewEventDetails"
 #define SEGUE_INDENTIFIER_MAP_VIEW @"pushMapWebView"
 #define FONT_HELVETICA_BOLD @"Helvetica-Bold"
+#define MAIN_COLOR [UIColor colorWithRed:0.9608f green:0.2824f blue:0.1922f alpha:1]
 
 #define EAManagedObjectContext [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]
 #define EAManagedObjectModel   [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectModel]
+
+#define ALL_EVENTS_LIST_URL_JSON [NSURL URLWithString:@"https://dl.dropboxusercontent.com/s/jv6b38u1jri5c99/data.json"]
 
 #define CIDS_MAIN_KEY @"cids"
 #define CALENDAR_EMBED_MAIN_KEY @"calendars%40startupdigest.com/private/embed"
@@ -36,6 +39,7 @@
 #define END_TIME_MAIN_KEY @"endTime"
 #define START_TIME_MAIN_KEY @"startTime"
 #define FORMAT_DATE @"yyyy-MM-dd'T'HH:mm:ss.SSS-HH:mm"
+#define FORMAT_SHORT_DATE @"yyyy-MM-dd"
 
 #define JSON_NAME_CALENDAR [[[[[[json objectForKey:CIDS_MAIN_KEY]objectForKey:CALENDAR_EMBED_MAIN_KEY] objectForKey:GDATA_MAIN_KEY] objectForKey:FEED_MAIN_KEY]valueForKey:TITLE_MAIN_KEY]valueForKey:DETAILS_KEY]
 #define JSON_CREATE_BY [[[[[[[[json objectForKey:CIDS_MAIN_KEY]objectForKey:CALENDAR_EMBED_MAIN_KEY] objectForKey:GDATA_MAIN_KEY] objectForKey:FEED_MAIN_KEY]valueForKey:AUTHOR_KEY]firstObject]valueForKey:NAME_KEY]valueForKey:DETAILS_KEY]
@@ -52,12 +56,16 @@
 #define TITLE_CREATED_BY @"Created by"
 #define TITLE_DESCRIPTION @"Description"
 
-#define ALL_EVENTS_LIST_URL_JSON [NSURL URLWithString:@"https://dl.dropboxusercontent.com/s/jv6b38u1jri5c99/data.json"]
-
 #define EAEVENTLIST_KEY_ID @"id"
 
 #define HEIGHT_CELL_LIST_EVENT 55
+#define HEIGHT_CELL_DETAIL_EVENT 40
+#define SPACE_HEIGHT_CELL_DETAIL_EVENT 5
+#define SPACE_HEIGHT_CELL_DETAIL_EVENT_ 20
 #define WIDTH_CONTENT_CELL_DETAIL 240
+#define WIDTH_TITLE_CELL_DETAIL 290
+
+#define LENGTH_SHORT_DATE_TIME 10
 
 /*CoreDataHelper*/
 #define EAKey_Id           @"id"
