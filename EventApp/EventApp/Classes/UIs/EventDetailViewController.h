@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventDetailViewController : UIViewController
+@interface EventDetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+@property (strong, nonatomic) NSString *eventsTitle;
+@property (strong, nonatomic) NSString *eventsEndTime;
+@property (strong, nonatomic) NSString *eventsStartTime;
+@property (strong, nonatomic) NSString *eventsLocation;
+@property (strong, nonatomic) NSString *eventsCalendar;
+@property (strong, nonatomic) NSString *eventsCreatedby;
+@property (strong, nonatomic) NSString *eventsDescription;
+
++ (NSString *)dateStringFromString:(NSString *)sourceString
+                      sourceFormat:(NSString *)sourceFormat
+                 destinationFormat:(NSString *)destinationFormat;
 
 @end
