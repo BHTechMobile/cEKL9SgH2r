@@ -48,7 +48,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 55;
+    return HEIGHT_CELL_LIST_EVENT;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -66,40 +66,37 @@
     
     eaEventsDetails = [arrayEvents objectAtIndex:indexPath.row];
     
-    cell.titleEvents.text = [[[arrayEvents objectAtIndex:indexPath.row] valueForKey:@"title"]valueForKey:@"$t"];
+    cell.titleEvents.text = [[[arrayEvents objectAtIndex:indexPath.row] valueForKey:TITLE_MAIN_KEY]valueForKey:DETAILS_KEY];
     
     
     // timestamp conversion
-    NSString *endReceivedInString = [[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:@"gd$when"]firstObject] valueForKey:@"endTime"];
-    NSString *startReceivedInString =[[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:@"gd$when"]firstObject] valueForKey:@"startTime"];
+    NSString *endReceivedInString = [[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:WHEN_MAIN_KEY]firstObject] valueForKey:END_TIME_MAIN_KEY];
+    NSString *startReceivedInString =[[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:WHEN_MAIN_KEY]firstObject] valueForKey:START_TIME_MAIN_KEY];
 
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS-HH:mm"];
-//    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     
-//    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-//    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-//    [dateFormatter setDoesRelativeDateFormatting:YES];
+    [formatter setDateFormat:FORMAT_DATE];
+    NSDate *dt = [formatter dateFromString:endReceivedInString];
+    NSDate *dt2 = [formatter dateFromString:startReceivedInString];
     
-    NSDate *dateStringEnd= [dateFormatter dateFromString:[endReceivedInString substringToIndex:10]];
-    NSDate *dateStringStart= [dateFormatter dateFromString:[startReceivedInString substringToIndex:10]];
-    
-    cell.timeTitleEvents.text = [NSString stringWithFormat:@"From %@ to %@",[startReceivedInString substringToIndex:10],[endReceivedInString substringToIndex:10]];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    NSString *dateAsStringEnd = [formatter stringFromDate:dt];
+    NSString *dateAsStringStart = [formatter stringFromDate:dt2];
 
-//    cell.timeTitleEvents.text = [NSString stringWithFormat:@"From %@ to %@",dateStringStart,dateStringEnd];
+    cell.timeTitleEvents.text = [NSString stringWithFormat:@"From %@ to %@",dateAsStringStart ,dateAsStringEnd];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [self performSegueWithIdentifier:@"viewEventDetails" sender:nil];
-    eventDetailViewController.navigationItem.title = [[[arrayEvents objectAtIndex:indexPath.row] valueForKey:@"title"]valueForKey:@"$t"];
-    [eventDetailViewController setEventsTitle:[[[arrayEvents objectAtIndex:indexPath.row] valueForKey:@"title"]valueForKey:@"$t"]];
-    [eventDetailViewController setEventsLocation:[[[[arrayEvents objectAtIndex:indexPath.row] valueForKey:@"gd$where"]firstObject]valueForKey:@"valueString"]];
-    [eventDetailViewController setEventsDescription:[[[arrayEvents objectAtIndex:indexPath.row] valueForKey:@"content"]valueForKey:@"$t"]];
+    [self performSegueWithIdentifier:SEGUE_INDENTIFIER sender:nil];
+    eventDetailViewController.navigationItem.title = [[[arrayEvents objectAtIndex:indexPath.row] valueForKey:TITLE_MAIN_KEY]valueForKey:DETAILS_KEY];
+    [eventDetailViewController setEventsTitle:[[[arrayEvents objectAtIndex:indexPath.row] valueForKey:TITLE_MAIN_KEY]valueForKey:DETAILS_KEY]];
+    [eventDetailViewController setEventsLocation:[[[[arrayEvents objectAtIndex:indexPath.row] valueForKey:WHERE_MAIN_KEY]firstObject]valueForKey:VALUE_STRING_MAIN_KEY]];
+    [eventDetailViewController setEventsDescription:[[[arrayEvents objectAtIndex:indexPath.row] valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY]];
     
-    [eventDetailViewController setEventsEndTime:[[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:@"gd$when"]firstObject] valueForKey:@"endTime"]];
-    [eventDetailViewController setEventsStartTime:[[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:@"gd$when"]firstObject] valueForKey:@"startTime"]];
+    [eventDetailViewController setEventsEndTime:[[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:WHEN_MAIN_KEY]firstObject] valueForKey:END_TIME_MAIN_KEY]];
+    [eventDetailViewController setEventsStartTime:[[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:WHEN_MAIN_KEY]firstObject] valueForKey:START_TIME_MAIN_KEY]];
     
     [eventDetailViewController setEventsCreatedby:eventListModel.createdBy];
     [eventDetailViewController setEventsCalendar:eventListModel.nameCalendar];
@@ -107,7 +104,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"viewEventDetails"]) {
+    if ([[segue identifier] isEqualToString:SEGUE_INDENTIFIER]) {
         eventDetailViewController = [segue destinationViewController];
     }
 }

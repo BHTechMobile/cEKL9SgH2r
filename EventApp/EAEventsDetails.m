@@ -27,8 +27,8 @@
 @dynamic eventCalendarName;
 @dynamic eventCreatedBy;
 
-+ (EAEventsDetails *)eventListsFromDictionary:(NSDictionary *)dict {
-    EAEventsDetails *managedObject = (EAEventsDetails *)[EAEventsDetails managedObjectWithKey:EAEVENTLIST_KEY_NAME andValue:[dict valueForKey:EAEVENTLIST_KEY_NAME]];
++ (EAEventsDetails *)eventsDetailFromDictionary:(NSDictionary *)dict {
+    EAEventsDetails *managedObject = (EAEventsDetails *)[EAEventsDetails managedObjectWithKey:EAEVENTLIST_KEY_ID andValue:[dict valueForKey:EAEVENTLIST_KEY_ID]];
     
     if (managedObject == nil) {
         managedObject = (EAEventsDetails *)[NSEntityDescription insertNewObjectForEntityForName:[EAEventsDetails description] inManagedObjectContext:EAManagedObjectContext];
@@ -38,14 +38,14 @@
     return managedObject;
 }
 
-+ (EAEventsDetails *)eventLists {
++ (EAEventsDetails *)eventsDetail {
     EAEventsDetails *bodyPart = (EAEventsDetails *)[NSEntityDescription insertNewObjectForEntityForName:[EAEventsDetails description] inManagedObjectContext:EAManagedObjectContext];
     
     return bodyPart;
 }
 
-+ (EAEventsDetails *)eventListsByName:(NSString *)name {
-    return (EAEventsDetails *)[EAEventsDetails managedObjectWithKey:EAEVENTLIST_KEY_NAME andValue:name];
++ (EAEventsDetails *)eventsDetailByID:(NSString *)eventID {
+    return (EAEventsDetails *)[EAEventsDetails managedObjectWithKey:EAEVENTLIST_KEY_ID andValue:eventID];
 }
 
 

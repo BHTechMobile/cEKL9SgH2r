@@ -1,8 +1,6 @@
 //
 //  JSONLoader.h
 //  EventApp
-//
-//  Created by PhamHuuPhuong on 18/11/14.
 //  Copyright (c) 2014 BHTech Mobile. All rights reserved.
 //
 

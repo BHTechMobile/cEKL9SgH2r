@@ -18,4 +18,8 @@
 @property (strong, nonatomic) NSString *eventsCreatedby;
 @property (strong, nonatomic) NSString *eventsDescription;
 
++ (NSString *)dateStringFromString:(NSString *)sourceString
+                      sourceFormat:(NSString *)sourceFormat
+                 destinationFormat:(NSString *)destinationFormat;
+
 @end

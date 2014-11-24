@@ -34,8 +34,8 @@
 - (void)addEvents:(NSSet *)values;
 - (void)removeEvents:(NSSet *)values;
 
-+ (EAEventsDetails *)eventListsFromDictionary:(NSDictionary *)dict;
-+ (EAEventsDetails *)eventLists;
-+ (EAEventsDetails *)eventListsByName:(NSString *)name;
++ (EAEventsDetails *)eventsDetailFromDictionary:(NSDictionary *)dict;
++ (EAEventsDetails *)eventsDetail;
++ (EAEventsDetails *)eventsDetailByID:(NSString *)eventID;
 
 @end

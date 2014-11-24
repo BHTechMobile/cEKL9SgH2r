@@ -4,17 +4,9 @@
 //
 
 #import "CoreDataHelpers.h"
-@implementation CoreDataHelpers
 #import "EAEventsDetails.h"
 
-#define EAKey_Id           @"id"
-#define EAKey_Title        @"title"
-#define EAKey_Front        @"front"
-
-#define CONDITION_EQUAL    @"="
-#define CONDITION_CONTAINS @"CONTAINS"
-
-#define LogError(error) NSLog(@"%s - Error %@", __PRETTY_FUNCTION__, error)
+@implementation CoreDataHelpers
 
 #pragma mark - General Methods
 

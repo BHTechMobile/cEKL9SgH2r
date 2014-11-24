@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="aDA-CQ-bv3">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
@@ -32,7 +33,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="12p-Dq-RGn">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="12p-Dq-RGn">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
@@ -43,6 +44,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="12p-Dq-RGn" secondAttribute="trailing" id="8sU-f0-V5f"/>
+                            <constraint firstItem="12p-Dq-RGn" firstAttribute="leading" secondItem="glU-xd-Ohl" secondAttribute="leading" id="kb4-EA-6sd"/>
+                            <constraint firstItem="lCE-Om-Xcb" firstAttribute="top" secondItem="12p-Dq-RGn" secondAttribute="bottom" id="lOC-xZ-ZcD"/>
+                            <constraint firstItem="12p-Dq-RGn" firstAttribute="top" secondItem="glU-xd-Ohl" secondAttribute="top" id="twW-tN-7yw"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="All Events" id="D4h-aD-ifc">
                         <barButtonItem key="leftBarButtonItem" systemItem="search" id="n4b-Mj-rYb"/>
@@ -73,7 +80,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fNj-09-ERL">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fNj-09-ERL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -85,6 +92,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fNj-09-ERL" firstAttribute="leading" secondItem="3vb-VS-Sui" secondAttribute="leading" id="ITz-bH-mm1"/>
+                            <constraint firstAttribute="trailing" secondItem="fNj-09-ERL" secondAttribute="trailing" id="XDk-JD-4Pb"/>
+                            <constraint firstItem="5VM-f1-6PH" firstAttribute="top" secondItem="fNj-09-ERL" secondAttribute="bottom" id="hLt-Ju-tPr"/>
+                            <constraint firstItem="fNj-09-ERL" firstAttribute="top" secondItem="3vb-VS-Sui" secondAttribute="top" id="kjo-92-yVR"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="N5R-yx-jzr">
                         <barButtonItem key="backBarButtonItem" title="Back" id="9kM-e4-mFF"/>

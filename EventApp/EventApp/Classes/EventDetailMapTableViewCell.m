@@ -1,8 +1,6 @@
 //
 //  EventDetailMapTableViewCell.m
 //  EventApp
-//
-//  Created by PhamHuuPhuong on 21/11/14.
 //  Copyright (c) 2014 BHTech Mobile. All rights reserved.
 //
 
@@ -22,8 +20,15 @@
     self = [[[NSBundle mainBundle] loadNibNamed:[[self class] description] owner:nil options:nil] objectAtIndex:0];
     if (self) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [_mapButton addTarget:self action:@selector(showMapPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self;
+}
+
+-(void)showMapPressed:(UIButton *)btn{
+    if (_delegate &&[_delegate respondsToSelector:@selector(clickedButtonLocation:)]) {
+        [_delegate performSelector:@selector(clickedButtonLocation:) withObject:btn];
+    }
 }
 
 - (IBAction)linkLocationMap:(id)sender {
