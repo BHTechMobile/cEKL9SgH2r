@@ -208,12 +208,9 @@
 #pragma mark - Link google maps
 
 - (void)clickedButtonLocation:(UIButton *)btnLocation{
-//    NSString *location = self.eventsLocation;
-//    NSString *url = [NSString stringWithFormat: @"http://maps.google.com/maps?q=%@",location];
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-    
-    UIApplication *app = [UIApplication sharedApplication];
-    [app openURL:[NSURL URLWithString: @"http://maps.google.com/maps?q=Pivotal%20Labs,%203495%20Deer%20Creek%20Rd%20%20Palo%20Alto,%20CA%2094304"]];
+    NSString *location = self.eventsLocation;
+    NSString *url = [NSString stringWithFormat: @"http://maps.google.com/maps?q=%@",[location stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
 #pragma mark - Custom Methods
