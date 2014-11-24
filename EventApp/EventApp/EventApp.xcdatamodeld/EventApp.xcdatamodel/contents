@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14A389" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="EAEventsDetails" representedClassName="EAEventsDetails" syncable="YES">
+        <attribute name="contentDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contentType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventCalendarName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventCreatedBy" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventEndTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="eventId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventNotification" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="eventStartTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="eventStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventWhere" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="linkHref" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="linkRel" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="linkType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="titleName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="titleType" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="EAEventsDetails" positionX="-63" positionY="-18" width="128" height="270"/>
+    </elements>
 </model>
