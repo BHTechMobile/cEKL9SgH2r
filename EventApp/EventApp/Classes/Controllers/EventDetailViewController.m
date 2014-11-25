@@ -59,7 +59,7 @@
         return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT_;
+        return cell.contentView.frame.size.height + /*cell.contentDescriptionLabel.frame.size.height +*/ SPACE_HEIGHT_CELL_DETAIL_EVENT_;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)){
         EventDetailMapTableViewCell *cell = (EventDetailMapTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.contentView.frame.size.height + cell.contentTitle.frame.size.height;
@@ -124,7 +124,7 @@
             NSString *dateAsStringEnd = [formatter stringFromDate:dt];
             NSString *dateAsStringStart = [formatter stringFromDate:dt2];
             
-            cell.contentDescription.text = [NSString stringWithFormat:@"From %@ \n to %@",dateAsStringStart ,dateAsStringEnd];
+            cell.contentDescription.text = [NSString stringWithFormat:@"From: %@ \n     to: %@",dateAsStringStart ,dateAsStringEnd];
         }
         else{
             [formatter setDateFormat:FORMAT_SHORT_DATE];
@@ -135,18 +135,32 @@
             NSString *dateAsStringEnd = [formatter stringFromDate:dt];
             NSString *dateAsStringStart = [formatter stringFromDate:dt2];
             
-            cell.contentDescription.text = [NSString stringWithFormat:@"From %@ to %@",dateAsStringStart ,dateAsStringEnd];
+            cell.contentDescription.text = [NSString stringWithFormat:@"From: %@ \n     to: %@",dateAsStringStart ,dateAsStringEnd];
         }
 
 
         [cell.contentDescription sizeToFit];
+        
+        CGRect fMap = [cell.contentDescriptionLabel frame];
+        fMap.size.width = WIDTH_CONTENT_CELL_DETAIL;
+        [cell.contentDescriptionLabel setFrame:fMap];
+        
         CGRect textFrame = cell.contentDescription.frame;
         textFrame.size.width = WIDTH_CONTENT_CELL_DETAIL;
+        textFrame.origin.y = CGRectGetMinX(cell.contentDescriptionLabel.frame);
         cell.contentDescription.frame = textFrame;
         
         CGRect containerFrame = cell.contentDescription.frame;
         containerFrame.size.height = cell.contentDescription.frame.size.height;
         cell.contentView.frame = containerFrame;
+        
+//        CGRect textFrame = cell.contentDescription.frame;
+//        textFrame.size.width = WIDTH_CONTENT_CELL_DETAIL;
+//        cell.contentDescription.frame = textFrame;
+//        
+//        CGRect containerFrame = cell.contentDescription.frame;
+//        containerFrame.size.height = cell.contentDescription.frame.size.height;
+//        cell.contentView.frame = containerFrame;
         
         tableCell = cell;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)){
