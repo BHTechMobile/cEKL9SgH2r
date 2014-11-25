@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9FA61D1B1A2338080044EF26 /* pin_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA61D1A1A2338080044EF26 /* pin_blue.png */; };
+		9F945DAC1A24745400B8DB3F /* pin_blue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F945DAB1A24745400B8DB3F /* pin_blue@2x.png */; };
+		9F945DAE1A24749600B8DB3F /* btn_back_cyan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F945DAD1A24749600B8DB3F /* btn_back_cyan@2x.png */; };
 		CE895CCF1A199AA500B0E6BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE895CCE1A199AA500B0E6BB /* main.m */; };
 		CE895CD21A199AA500B0E6BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE895CD11A199AA500B0E6BB /* AppDelegate.m */; };
 		CE895CD51A199AA500B0E6BB /* EventApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CE895CD31A199AA500B0E6BB /* EventApp.xcdatamodeld */; };
@@ -48,7 +49,8 @@
 
 /* Begin PBXFileReference section */
 		06E92D15D571D92AA76A698C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		9FA61D1A1A2338080044EF26 /* pin_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin_blue.png; sourceTree = "<group>"; };
+		9F945DAB1A24745400B8DB3F /* pin_blue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin_blue@2x.png"; sourceTree = "<group>"; };
+		9F945DAD1A24749600B8DB3F /* btn_back_cyan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back_cyan@2x.png"; sourceTree = "<group>"; };
 		9FD409E21A1DE3490062F9C6 /* EventApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EventApp-Prefix.pch"; sourceTree = "<group>"; };
 		AAC528A196AC02FDC342D5EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE895CC91A199AA400B0E6BB /* EventApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EventApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -268,7 +270,8 @@
 		CE895CFA1A199B1200B0E6BB /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				9FA61D1A1A2338080044EF26 /* pin_blue.png */,
+				9F945DAD1A24749600B8DB3F /* btn_back_cyan@2x.png */,
+				9F945DAB1A24745400B8DB3F /* pin_blue@2x.png */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -370,10 +373,11 @@
 			files = (
 				CE895CDB1A199AA500B0E6BB /* Main.storyboard in Resources */,
 				CE895CE01A199AA500B0E6BB /* LaunchScreen.xib in Resources */,
-				9FA61D1B1A2338080044EF26 /* pin_blue.png in Resources */,
 				CEC6A3851A242FC00023B98E /* EventDetailTableViewCell.xib in Resources */,
 				CEC6A3861A242FC00023B98E /* EventListTableViewCell.xib in Resources */,
+				9F945DAC1A24745400B8DB3F /* pin_blue@2x.png in Resources */,
 				CE895CDD1A199AA500B0E6BB /* Images.xcassets in Resources */,
+				9F945DAE1A24749600B8DB3F /* btn_back_cyan@2x.png in Resources */,
 				CEC6A3841A242FC00023B98E /* EventDetailMapTableViewCell.xib in Resources */,
 				CEC6A3831A242FC00023B98E /* EventDescriptionTableViewCell.xib in Resources */,
 			);
