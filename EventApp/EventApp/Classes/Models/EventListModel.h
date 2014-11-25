@@ -12,8 +12,6 @@
 @property (nonatomic, retain) NSString *createdBy;
 @property (nonatomic, retain) NSString *nameCalendar;
 
-- (void)getJSONfile;
-- (void)fetchedData:(NSData *)responseData;
-- (void)insertData:(NSArray *)arrayEvents;
-    
+- (void)getEventsSuccess:(void(^)())success failure:(void(^)(NSError* error))failure;
+
 @end

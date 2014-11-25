@@ -90,25 +90,17 @@
 
 #pragma mark - EAEventsDetails
 
-+ (NSArray *)alleventLists {
-	return [CoreDataHelpers allMangedObjectInEntity:[EAEventsDetails description] orderBy:EAKey_Title];
++ (NSArray *)allEvents {
+	return [CoreDataHelpers allMangedObjectInEntity:[EAEventsDetails description] orderBy:@"eventStartTime"];
 }
 
-+ (NSArray *)eventListsWithIdContaining:(NSString *)eventId {
++ (NSArray *)eventsWithIdContaining:(NSString *)eventId {
 	return [CoreDataHelpers allManageObjectsInEntity:[EAEventsDetails description] withKey:EAKey_Id contain:eventId orderBy:EAKey_Title];
 }
 
-+ (NSArray *)alleventListsIds {
-	return [CoreDataHelpers allValueOfKey:EAKey_Id inEntity:[EAEventsDetails description] orderBy:EAKey_Title];
-}
-
-+ (EAEventsDetails *)eventListsById:(NSString *)eventId {
++ (EAEventsDetails *)eventById:(NSString *)eventId {
 	return (EAEventsDetails *)[CoreDataHelpers manageObjectInEntity:[EAEventsDetails description] withKey:EAKey_Id andValue:eventId];
 }
-
-//+ (NSArray *)eventListsOfFront:(BOOL)front {
-//	return [CoreDataHelpers allManageObjectsInEntity:[EAEventsDetails description] withKey:EAKey_Front condition:CONDITION_EQUAL value:[NSString stringWithFormat:@"%d", front] orderBy:EAKey_Title];
-//}
 
 #pragma mark - Custom method
 + (BOOL)array:(NSArray *)inputArray differsFromArray:(NSArray *)sourceArray {

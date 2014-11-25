@@ -9,94 +9,176 @@
 #import "AppDelegate.h"
 #import "EventListTableViewCell.h"
 #import "JSONLoader.h"
+#import "CoreDataHelpers.h"
 
 @implementation EventListModel{
     EAEventsDetails *eaEventsDetails;
     NSDictionary *dictEvents;
 }
 
-- (void)getJSONfile{
-    NSData* data = [NSData dataWithContentsOfURL:ALL_EVENTS_LIST_URL_JSON];
-    [self performSelectorOnMainThread:@selector(fetchedData:) withObject:data waitUntilDone:YES];
-    //    [NSThread detachNewThreadSelector:@selector(insertData:) toTarget:self withObject:nil];
+-(id)init{
+    self = [super init];
+    if (self) {
+        self.nameCalendar = @"Silicon Valley StartupDigest";
+        self.createdBy = @"startupdigest.com";
+
+    }
+    return self;
 }
 
-- (void)fetchedData:(NSData *)responseData {
-    NSError* error;
-    NSDictionary* json = [NSJSONSerialization
-                          JSONObjectWithData:responseData
-                          options:kNilOptions
-                          error:&error];
-    self.nameCalendar = JSON_NAME_CALENDAR;
-    self.createdBy = JSON_CREATE_BY;
-    self.arrayEvents = JSON_EVENTS_ARRAY;
-    NSLog(@"json %@",json);
+- (void)getEventsSuccess:(void(^)())success failure:(void(^)(NSError* error))failure{
+    [JSONLoader requestDataSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self insertData:[[responseObject valueForKey:@"feed"] valueForKey:@"entry"]];
+            if (success) {
+                success();
+            }
+        });
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (failure) {
+            failure(error);
+        }
+    }];
 }
 
+#define SeperateArrayString @"----"
+#define NewYearString @"Wed Jan 1, 2014 0am"
 
-
-- (void)insertData:(NSArray *)arrayEvents{
-    NSMutableArray * dataJson = [NSMutableArray new];
-    for (int i = 0; i < arrayEvents.count; i++) {
-        
-        NSString *endReceivedInString = [[[[arrayEvents objectAtIndex:i]valueForKey:WHEN_MAIN_KEY]firstObject] valueForKey:END_TIME_MAIN_KEY];
-        NSString *startReceivedInString =[[[[arrayEvents objectAtIndex:i]valueForKey:WHEN_MAIN_KEY]firstObject] valueForKey:START_TIME_MAIN_KEY];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        
-        if(endReceivedInString.length > LENGTH_SHORT_DATE_TIME){
-            [dateFormatter setDateFormat:FORMAT_DATE];
-            [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-            EAEventsDetails * eventDetail =
-            [EAEventsDetails eventsDetailFromDictionary:@{
-                                                          @"eventId":[[[arrayEvents objectAtIndex:i]valueForKey:ID_MAIN_KEY]valueForKey:DETAILS_KEY],
-                                                          @"contentDescription":[[[arrayEvents objectAtIndex:i]valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY],
-                                                          @"contentType":[[[arrayEvents objectAtIndex:i]valueForKey:CONTENT_MAIN_KEY]valueForKey:TYPE_MAIN_KEY],
-                                                          @"titleName":[[[arrayEvents objectAtIndex:i]valueForKey:TITLE_MAIN_KEY]valueForKey:DETAILS_KEY],
-                                                          @"titleType":[[[arrayEvents objectAtIndex:i]valueForKey:TITLE_MAIN_KEY]valueForKey:TYPE_MAIN_KEY],
-                                                          @"linkRel":[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:LINK_REL_MAIN_KEY],
-                                                          @"linkType":[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:TYPE_MAIN_KEY],
-                                                          @"linkHref":[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:LINK_HREF_MAIN_KEY],
-                                                          @"eventWhere":[[[[arrayEvents objectAtIndex:i]valueForKey:WHERE_MAIN_KEY]firstObject]valueForKey:VALUE_STRING_MAIN_KEY],
-                                                          @"eventCreatedBy":self.createdBy,
-                                                          @"eventCalendarName":self.nameCalendar,
-                                                          @"eventEndTime":[dateFormatter dateFromString:endReceivedInString],
-                                                          @"eventStartTime":[dateFormatter dateFromString:startReceivedInString]
-                                                          }];
-            [dataJson addObject:eventDetail];
-            
-        }else{
-            [dateFormatter setDateFormat:FORMAT_SHORT_DATE];
-            [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
-            EAEventsDetails * eventDetail =
-            [EAEventsDetails eventsDetailFromDictionary:@{
-                                                          @"eventId":[[[arrayEvents objectAtIndex:i]valueForKey:ID_MAIN_KEY]valueForKey:DETAILS_KEY],
-                                                          @"contentDescription":[[[arrayEvents objectAtIndex:i]valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY],
-                                                          @"contentType":[[[arrayEvents objectAtIndex:i]valueForKey:CONTENT_MAIN_KEY]valueForKey:TYPE_MAIN_KEY],
-                                                          @"titleName":[[[arrayEvents objectAtIndex:i]valueForKey:TITLE_MAIN_KEY]valueForKey:DETAILS_KEY],
-                                                          @"titleType":[[[arrayEvents objectAtIndex:i]valueForKey:TITLE_MAIN_KEY]valueForKey:TYPE_MAIN_KEY],
-                                                          @"linkRel":[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:LINK_REL_MAIN_KEY],
-                                                          @"linkType":[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:TYPE_MAIN_KEY],
-                                                          @"linkHref":[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:LINK_HREF_MAIN_KEY],
-                                                          @"eventWhere":[[[[arrayEvents objectAtIndex:i]valueForKey:WHERE_MAIN_KEY]firstObject]valueForKey:VALUE_STRING_MAIN_KEY],
-                                                          @"eventCreatedBy":self.createdBy,
-                                                          @"eventCalendarName":self.nameCalendar,
-                                                          @"eventEndTime":[dateFormatter dateFromString:endReceivedInString],
-                                                          @"eventStartTime":[dateFormatter dateFromString:startReceivedInString]
-                                                          }];
-            [dataJson addObject:eventDetail];
+-(void)breakString:(NSString*)inputString toStartTime:(NSDate**)startTime andEndTime:(NSDate**)endTime location:(NSString**)location timeZone:(NSString**)timeZone{
+    NSString * startTimeString = @"";
+    NSString * endTimeString = @"";
+    BOOL hasStartTime = YES;
+    BOOL hasEndTime = YES;
+    BOOL hasGMT = YES;
+    BOOL hasLocation = YES;
+    BOOL hasStatus = YES;
+    
+    inputString     = [inputString stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""];
+    inputString     = [inputString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    inputString     = [inputString stringByReplacingOccurrencesOfString:@"<br>" withString:@""];
+    
+    hasStartTime    = !([inputString rangeOfString:@"When: "].location == NSNotFound);
+    inputString     = [inputString stringByReplacingOccurrencesOfString:@"When: " withString:@""];
+    
+    hasEndTime      = !([inputString rangeOfString:@" to "].location == NSNotFound);
+    inputString     = [inputString stringByReplacingOccurrencesOfString:@" to " withString:SeperateArrayString];
+    
+    hasGMT          = !([inputString rangeOfString:@"GMT"].location == NSNotFound);
+    inputString     = [inputString stringByReplacingOccurrencesOfString:@"GMT" withString:SeperateArrayString];
+    
+    hasLocation     = !([inputString rangeOfString:@"Where: "].location == NSNotFound);
+    inputString     = [inputString stringByReplacingOccurrencesOfString:@"Where: " withString:SeperateArrayString];
+    
+    hasStatus       = !([inputString rangeOfString:@"Event Status: "].location == NSNotFound);
+    inputString     = [inputString stringByReplacingOccurrencesOfString:@"Event Status: " withString:SeperateArrayString];
+    
+    NSArray * resultArray = [inputString componentsSeparatedByString:SeperateArrayString];
+    @try {
+        startTimeString = hasStartTime?resultArray[0]:@"Unknown Date";
+        endTimeString = hasEndTime?resultArray[hasStartTime]:@"Unknown Date";
+        if ([endTimeString isEqualToString:@"Unknown Date"]) {
             
         }
+        *timeZone = hasGMT?resultArray[hasStartTime+hasEndTime]:@"0";
+        *location = hasLocation?resultArray[hasStartTime+hasEndTime+hasLocation]:@"Unknown Location";
+        //        * = hasStatus?resultArray[hasStartTime+hasEndTime+hasGMT+hasLocation];
+        
+        NSDateFormatter *startDateFormatter = [[NSDateFormatter alloc] init];
+        NSDateFormatter *endDateFormatter = [[NSDateFormatter alloc] init];
+
+        
+        [startDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:(NSInteger)((*timeZone).floatValue*3600)]];
+        [endDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:(NSInteger)((*timeZone).floatValue*3600)]];
+
+        if (!([startTimeString rangeOfString:@":"].location == NSNotFound)) {
+            [startDateFormatter setDateFormat:FORMAT_DATE];
+        }
+        else if (startTimeString.length >16){
+            [startDateFormatter setDateFormat:FORMAT_DATE_NO_MINUTE];
+        }
+        else{
+            [startDateFormatter setDateFormat:FORMAT_DATE_ALL_DAY];
+            [endDateFormatter setDateFormat:FORMAT_DATE_ALL_DAY];
+            endTimeString = startTimeString;
+        }
+        
+        if (endTimeString.length <10) {
+            NSString * checkPoint = [startTimeString substringWithRange:NSMakeRange(15, 1)];
+            endTimeString = [[startTimeString substringToIndex:[checkPoint isEqualToString:@" "]?15:16] stringByAppendingString:[NSString stringWithFormat:@" %@",endTimeString]];
+        }
+        
+        if (!([endTimeString rangeOfString:@":"].location == NSNotFound)) {
+            [endDateFormatter setDateFormat:FORMAT_DATE];
+        }
+        else if (endTimeString.length >16){
+            [endDateFormatter setDateFormat:FORMAT_DATE_NO_MINUTE];
+        }
+        
+        *startTime = [startDateFormatter dateFromString:startTimeString];
+        *endTime = [endDateFormatter dateFromString:endTimeString];
+        
+        if (!(*startTime)) {
+            NSLog(@"%@",startTimeString);
+        }
+        
+        if (!(*endTime)) {
+            NSLog(@"%@",endTimeString);
+        }
+        
+        
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception);
+    }
+    @finally {
+        
     }
     
-    NSLog(@"Done %@",dataJson);
-    NSError *error;
+    
+}
+
+- (void)insertData:(NSArray *)arrayEvents{
+    NSMutableArray * events = [NSMutableArray new];
+    for (int i = 0; i < arrayEvents.count; i++) {
+        
+        NSDictionary * dic = arrayEvents[i];
+        NSDate* startDate;
+        NSDate* endDate;
+
+        NSString* locationString = @"";
+        NSString* timeZoneString = @"";
+        
+        [self breakString:[[dic valueForKey:SUMMARY_KEY] valueForKey:DETAILS_KEY] toStartTime:&startDate andEndTime:&endDate location:&locationString timeZone:&timeZoneString];
+        if ([locationString isEqualToString:@"Unknow Location"]) {
+            NSLog(@"%@",[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:DETAILS_KEY]);
+        }
+        
+        EAEventsDetails* eventDetail = [EAEventsDetails eventsDetailFromDictionary:@{
+                                                                                     @"eventId":[[[arrayEvents objectAtIndex:i] valueForKey:ID_MAIN_KEY] valueForKey:DETAILS_KEY],
+                                                                                     @"contentDescription":[[dic valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY],
+                                                                                     @"contentType":[[dic valueForKey:CONTENT_MAIN_KEY] valueForKey:TYPE_MAIN_KEY],
+                                                                                     @"titleName":[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:DETAILS_KEY],
+                                                                                     @"titleType":[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:TYPE_MAIN_KEY],
+                                                                                     @"linkRel":[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:LINK_REL_MAIN_KEY],
+                                                                                     @"linkType":[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:TYPE_MAIN_KEY],
+                                                                                     @"linkHref":[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:LINK_HREF_MAIN_KEY],
+                                                                                     @"eventWhere":locationString,
+                                                                                     @"eventCreatedBy":self.createdBy,
+                                                                                     @"eventCalendarName":self.nameCalendar,
+                                                                                     @"eventEndTime":endDate,
+                                                                                     @"eventStartTime":startDate
+                                                                                     }];
+        [events addObject:eventDetail];
+    }
+    
+    NSError *error = nil;
     if (![EAManagedObjectContext save:&error]) {
         NSLog(@"Problem saving: %@", [error localizedDescription]);
     }
 }
 
 - (NSArray *)arrayEvents{
-    return _arrayEvents;
+    return [CoreDataHelpers allEvents];
 }
 
 @end

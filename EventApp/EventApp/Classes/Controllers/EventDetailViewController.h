@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EAEventsDetails.h"
 
 @interface EventDetailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+
+@property (strong, nonatomic) EAEventsDetails *event;
 
 @property (strong, nonatomic) NSString *eventsTitle;
 @property (strong, nonatomic) NSString *eventsEndTime;

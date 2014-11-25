@@ -20,6 +20,7 @@
 #define FEED_MAIN_KEY @"feed"
 #define TITLE_MAIN_KEY @"title"
 #define DETAILS_KEY @"$t"
+#define SUMMARY_KEY @"summary"
 #define AUTHOR_KEY @"author"
 #define NAME_KEY @"name"
 #define ENTRY_KEY @"entry"
@@ -35,7 +36,10 @@
 #define WHEN_MAIN_KEY @"gd$when"
 #define END_TIME_MAIN_KEY @"endTime"
 #define START_TIME_MAIN_KEY @"startTime"
-#define FORMAT_DATE @"yyyy-MM-dd'T'HH:mm:ss.SSS-HH:mm"
+#define FORMAT_DATE_NO_MINUTE @"EEE MMM d, yyyy ha"
+#define FORMAT_DATE @"EEE MMM d, yyyy h:ma"
+#define FORMAT_DATE_ALL_DAY @"EEE MMM d, yyyy"
+
 #define FORMAT_SHORT_DATE @"yyyy-MM-dd"
 
 #define JSON_NAME_CALENDAR [[[[[[json objectForKey:CIDS_MAIN_KEY]objectForKey:CALENDAR_EMBED_MAIN_KEY] objectForKey:GDATA_MAIN_KEY] objectForKey:FEED_MAIN_KEY]valueForKey:TITLE_MAIN_KEY]valueForKey:DETAILS_KEY]
@@ -60,7 +64,7 @@
 
 #define HEIGHT_CELL_LIST_EVENT 55
 #define WIDTH_CONTENT_CELL_DETAIL 240
-#define LENGTH_SHORT_DATE_TIME 10
+#define LENGTH_SHORT_DATE_TIME 15
 
 /*CoreDataHelper*/
 #define EAKey_Id           @"id"
