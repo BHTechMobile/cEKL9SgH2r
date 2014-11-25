@@ -53,8 +53,8 @@
 #define TITLE_CREATED_BY @"Created by"
 #define TITLE_DESCRIPTION @"Description"
 
-//#define ALL_EVENTS_LIST_URL_JSON [NSURL URLWithString:@"https://dl.dropboxusercontent.com/s/jv6b38u1jri5c99/data.json"]
-#define ALL_EVENTS_LIST_URL_JSON [NSURL URLWithString:@"https://www.google.com/calendar/feeds/calendars@startupdigest.com/public/basic?alt=json&max-results=50"]
+#define ALL_EVENTS_LIST_URL_JSON [NSURL URLWithString:@"https://dl.dropboxusercontent.com/s/jv6b38u1jri5c99/data.json"]
+//#define ALL_EVENTS_LIST_URL_JSON [NSURL URLWithString:@"https://www.google.com/calendar/feeds/calendars@startupdigest.com/public/basic?alt=json&max-results=50"]
 
 #define EAEVENTLIST_KEY_ID @"eventId"
 

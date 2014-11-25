@@ -72,18 +72,19 @@
     // timestamp conversion
     NSString *endReceivedInString = [[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:WHEN_MAIN_KEY]firstObject] valueForKey:END_TIME_MAIN_KEY];
     NSString *startReceivedInString =[[[[arrayEvents objectAtIndex:indexPath.row]valueForKey:WHEN_MAIN_KEY]firstObject] valueForKey:START_TIME_MAIN_KEY];
-
+    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     
-    [formatter setDateFormat:FORMAT_DATE];
-    NSDate *dt = [formatter dateFromString:endReceivedInString];
-    NSDate *dt2 = [formatter dateFromString:startReceivedInString];
+    [formatter setDateFormat:FORMAT_SHORT_DATE];
+    NSDate *dt = [formatter dateFromString:[endReceivedInString substringToIndex:LENGTH_SHORT_DATE_TIME]];
+    NSDate *dt2 = [formatter dateFromString:[startReceivedInString substringToIndex:LENGTH_SHORT_DATE_TIME]];
     
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     NSString *dateAsStringEnd = [formatter stringFromDate:dt];
     NSString *dateAsStringStart = [formatter stringFromDate:dt2];
-
+    
     cell.timeTitleEvents.text = [NSString stringWithFormat:@"From %@ to %@",dateAsStringStart ,dateAsStringEnd];
+
     
     return cell;
 }
