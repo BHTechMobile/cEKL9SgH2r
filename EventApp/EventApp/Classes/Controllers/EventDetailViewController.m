@@ -14,8 +14,9 @@
 #import <MapKit/MapKit.h>
 #import "MapViewController.h"
 
-@interface EventDetailViewController ()<EventDetailMapTableViewCellDelegate>{
+@interface EventDetailViewController ()<EventDetailMapTableViewCellDelegate,UITextViewDelegate>{
     EventListModel *eventListModel;
+    NSURL *linktoWeb;
 }
 
 @end
@@ -154,14 +155,6 @@
         containerFrame.size.height = cell.contentDescription.frame.size.height;
         cell.contentView.frame = containerFrame;
         
-//        CGRect textFrame = cell.contentDescription.frame;
-//        textFrame.size.width = WIDTH_CONTENT_CELL_DETAIL;
-//        cell.contentDescription.frame = textFrame;
-//        
-//        CGRect containerFrame = cell.contentDescription.frame;
-//        containerFrame.size.height = cell.contentDescription.frame.size.height;
-//        cell.contentView.frame = containerFrame;
-        
         tableCell = cell;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)){
         //Map
@@ -231,6 +224,7 @@
         containerFrame.size.height = cell.contentDescription.frame.size.height;
         cell.contentView.frame = containerFrame;
         
+        [cell.contentDescription setDelegate:self];
         tableCell = cell;
     }
     
@@ -240,9 +234,57 @@
 #pragma mark - Link google maps
 
 - (void)clickedButtonLocation:(UIButton *)btnLocation{
-    NSString *location = self.eventsLocation;
-    NSString *url = [NSString stringWithFormat: @"http://maps.google.com/maps?q=%@",[location stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    
+    UIAlertView *messageAlert = [[UIAlertView alloc] initWithTitle:QS_MAP_TITLE
+                                                           message:QS_MAP
+                                                          delegate:self
+                                                 cancelButtonTitle:NO_KEY
+                                                 otherButtonTitles:YES_KEY,nil];
+    [messageAlert setTag:AlertLinkMap];
+    [messageAlert show];
+}
+
+#pragma mark - Alert View
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    switch (alertView.tag) {
+        case AlertLinkMap:{
+            if (buttonIndex == 1)
+            {
+                NSString *location = self.eventsLocation;
+                NSString *url = [NSString stringWithFormat: @"http://maps.google.com/maps?q=%@",[location stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+            }else if (buttonIndex == 0){
+                NSLog(@"NO");
+            }
+        }
+            break;
+        case AlertLinkWeb:{
+            if (buttonIndex == 1)
+            {
+                [[UIApplication sharedApplication] openURL:linktoWeb];
+            }else if (buttonIndex == 0){
+                NSLog(@"NO");
+            }
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange{
+    linktoWeb = URL;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:QS_WEB_TITLE
+                                                        message:QS_WEB_TITLE
+                                                       delegate:self
+                                              cancelButtonTitle:NO_KEY
+                                              otherButtonTitles:YES_KEY,nil];
+    [alertView setTag:AlertLinkWeb];
+    [alertView show];
+    
+    return NO;
 }
 
 #pragma mark - Custom Methods

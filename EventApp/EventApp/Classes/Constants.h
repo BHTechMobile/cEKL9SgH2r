@@ -74,6 +74,10 @@
 
 #define EAEVENTLIST_KEY_ID @"eventId"
 
+#define AlertLinkMap 22
+#define AlertLinkWeb 23
+#define AlertLinkMail 24
+
 #define HEIGHT_CELL_LIST_EVENT 55
 #define HEIGHT_CELL_DETAIL_EVENT 30
 #define SPACE_HEIGHT_CELL_DETAIL_EVENT 5
@@ -81,6 +85,13 @@
 #define WIDTH_CONTENT_CELL_DETAIL 240
 #define WIDTH_TITLE_CELL_DETAIL 290
 #define LENGTH_SHORT_DATE_TIME 10
+
+#define NO_KEY @"No"
+#define YES_KEY @"Yes"
+#define QS_MAP_TITLE @"Location Message!"
+#define QS_MAP @"Are you see location in maps? "
+#define QS_WEB_TITLE @"Link Message!"
+#define QS_WEB @"Are you go to the link? "
 
 /*CoreDataHelper*/
 #define EAKey_Id           @"id"
