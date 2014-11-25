@@ -35,25 +35,25 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 40;
+    CGFloat height = HEIGHT_CELL_DETAIL_EVENT;
     if (indexPath.row == 0){
         EventDetailTableViewCell *cell = (EventDetailTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 5;
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 20;
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT_;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)){
         EventDetailMapTableViewCell *cell = (EventDetailMapTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.contentView.frame.size.height + cell.contentTitle.frame.size.height;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 5;
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0) + ((self.eventsCreatedby.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 5;
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
     }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0) + ((self.eventsCreatedby.length > 0)?1:0) + ((self.eventsDescription.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 5;
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT_;
     }
     
     return height;
@@ -74,10 +74,10 @@
             cell = [[EventDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EventDetailTableViewCell_ID];
         }
         [cell.contentDetailEvents setText:self.eventsTitle];
-        cell.contentDetailEvents.font = [UIFont fontWithName:FONT_HELVETICA_BOLD size:14];
+        cell.contentDetailEvents.font = [UIFont fontWithName:FONT_HELVETICA_BOLD size:FONT_SIZE_HELVETICA_BOLD];
         [cell.contentDetailEvents sizeToFit];
         CGRect textFrame = cell.contentDetailEvents.frame;
-        textFrame.size.width = 290;
+        textFrame.size.width = WIDTH_TITLE_CELL_DETAIL;
         cell.contentDetailEvents.frame = textFrame;
         
         CGRect containerFrame = cell.contentDetailEvents.frame;
@@ -208,12 +208,6 @@
 #pragma mark - Link google maps
 
 - (void)clickedButtonLocation:(UIButton *)btnLocation{
-//    [self performSegueWithIdentifier:SEGUE_INDENTIFIER_MAP_VIEW sender:nil];
-//    MapViewController *mapViewController = [[MapViewController alloc] init];
-//    
-//    [mapViewController.mapContentView loadRequest:[NSURLRequest requestWithURL:
-//                            [NSURL URLWithString: @"http://www.google.com"]]];
-    
     NSString *location = self.eventsLocation;
     NSString *url = [NSString stringWithFormat: @"http://maps.google.com/maps?q=%@",[location stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];

@@ -48,19 +48,19 @@
             [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
             EAEventsDetails * eventDetail =
             [EAEventsDetails eventsDetailFromDictionary:@{
-                                                          @"eventId":[[[arrayEvents objectAtIndex:i]valueForKey:ID_MAIN_KEY]valueForKey:DETAILS_KEY],
-                                                          @"contentDescription":[[[arrayEvents objectAtIndex:i]valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY],
-                                                          @"contentType":[[[arrayEvents objectAtIndex:i]valueForKey:CONTENT_MAIN_KEY]valueForKey:TYPE_MAIN_KEY],
-                                                          @"titleName":[[[arrayEvents objectAtIndex:i]valueForKey:TITLE_MAIN_KEY]valueForKey:DETAILS_KEY],
-                                                          @"titleType":[[[arrayEvents objectAtIndex:i]valueForKey:TITLE_MAIN_KEY]valueForKey:TYPE_MAIN_KEY],
-                                                          @"linkRel":[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:LINK_REL_MAIN_KEY],
-                                                          @"linkType":[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:TYPE_MAIN_KEY],
-                                                          @"linkHref":[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:LINK_HREF_MAIN_KEY],
-                                                          @"eventWhere":[[[[arrayEvents objectAtIndex:i]valueForKey:WHERE_MAIN_KEY]firstObject]valueForKey:VALUE_STRING_MAIN_KEY],
-                                                          @"eventCreatedBy":self.createdBy,
-                                                          @"eventCalendarName":self.nameCalendar,
-                                                          @"eventEndTime":[dateFormatter dateFromString:endReceivedInString],
-                                                          @"eventStartTime":[dateFormatter dateFromString:startReceivedInString]
+                                                          EA_KEY_ID:[[[arrayEvents objectAtIndex:i]valueForKey:ID_MAIN_KEY]valueForKey:DETAILS_KEY],
+                                                          EA_KEY_CONTENT_DESCRIPTION:[[[arrayEvents objectAtIndex:i]valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY],
+                                                          EA_KEY_CONTENT_TYPE:[[[arrayEvents objectAtIndex:i]valueForKey:CONTENT_MAIN_KEY]valueForKey:TYPE_MAIN_KEY],
+                                                          EA_KEY_TITLE_NAME:[[[arrayEvents objectAtIndex:i]valueForKey:TITLE_MAIN_KEY]valueForKey:DETAILS_KEY],
+                                                          EA_KEY_TITLE_TYPE:[[[arrayEvents objectAtIndex:i]valueForKey:TITLE_MAIN_KEY]valueForKey:TYPE_MAIN_KEY],
+                                                          EA_KEY_LINK_REL:[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:LINK_REL_MAIN_KEY],
+                                                          EA_KEY_LINK_TYPE:[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:TYPE_MAIN_KEY],
+                                                          EA_KEY_LINK_HREF:[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:LINK_HREF_MAIN_KEY],
+                                                          EA_KEY_EVENT_WHERE:[[[[arrayEvents objectAtIndex:i]valueForKey:WHERE_MAIN_KEY]firstObject]valueForKey:VALUE_STRING_MAIN_KEY],
+                                                          EA_KEY_EVENT_CREATED_BY:self.createdBy,
+                                                          EA_KEY_EVENT_CALENDAR_NAME:self.nameCalendar,
+                                                          EA_KEY_EVENT_END_TIME:[dateFormatter dateFromString:endReceivedInString],
+                                                          EA_KEY_EVENT_START_TIME:[dateFormatter dateFromString:startReceivedInString]
                                                           }];
             [dataJson addObject:eventDetail];
             
@@ -69,19 +69,19 @@
             [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
             EAEventsDetails * eventDetail =
             [EAEventsDetails eventsDetailFromDictionary:@{
-                                                          @"eventId":[[[arrayEvents objectAtIndex:i]valueForKey:ID_MAIN_KEY]valueForKey:DETAILS_KEY],
-                                                          @"contentDescription":[[[arrayEvents objectAtIndex:i]valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY],
-                                                          @"contentType":[[[arrayEvents objectAtIndex:i]valueForKey:CONTENT_MAIN_KEY]valueForKey:TYPE_MAIN_KEY],
-                                                          @"titleName":[[[arrayEvents objectAtIndex:i]valueForKey:TITLE_MAIN_KEY]valueForKey:DETAILS_KEY],
-                                                          @"titleType":[[[arrayEvents objectAtIndex:i]valueForKey:TITLE_MAIN_KEY]valueForKey:TYPE_MAIN_KEY],
-                                                          @"linkRel":[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:LINK_REL_MAIN_KEY],
-                                                          @"linkType":[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:TYPE_MAIN_KEY],
-                                                          @"linkHref":[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:LINK_HREF_MAIN_KEY],
-                                                          @"eventWhere":[[[[arrayEvents objectAtIndex:i]valueForKey:WHERE_MAIN_KEY]firstObject]valueForKey:VALUE_STRING_MAIN_KEY],
-                                                          @"eventCreatedBy":self.createdBy,
-                                                          @"eventCalendarName":self.nameCalendar,
-                                                          @"eventEndTime":[dateFormatter dateFromString:endReceivedInString],
-                                                          @"eventStartTime":[dateFormatter dateFromString:startReceivedInString]
+                                                          EA_KEY_ID:[[[arrayEvents objectAtIndex:i]valueForKey:ID_MAIN_KEY]valueForKey:DETAILS_KEY],
+                                                          EA_KEY_CONTENT_DESCRIPTION:[[[arrayEvents objectAtIndex:i]valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY],
+                                                          EA_KEY_CONTENT_TYPE:[[[arrayEvents objectAtIndex:i]valueForKey:CONTENT_MAIN_KEY]valueForKey:TYPE_MAIN_KEY],
+                                                          EA_KEY_TITLE_NAME:[[[arrayEvents objectAtIndex:i]valueForKey:TITLE_MAIN_KEY]valueForKey:DETAILS_KEY],
+                                                          EA_KEY_TITLE_TYPE:[[[arrayEvents objectAtIndex:i]valueForKey:TITLE_MAIN_KEY]valueForKey:TYPE_MAIN_KEY],
+                                                          EA_KEY_LINK_REL:[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:LINK_REL_MAIN_KEY],
+                                                          EA_KEY_LINK_TYPE:[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:TYPE_MAIN_KEY],
+                                                          EA_KEY_LINK_HREF:[[[[arrayEvents objectAtIndex:i]valueForKey:LINK_MAIN_KEY]firstObject]valueForKey:LINK_HREF_MAIN_KEY],
+                                                          EA_KEY_EVENT_WHERE:[[[[arrayEvents objectAtIndex:i]valueForKey:WHERE_MAIN_KEY]firstObject]valueForKey:VALUE_STRING_MAIN_KEY],
+                                                          EA_KEY_EVENT_CREATED_BY:self.createdBy,
+                                                          EA_KEY_EVENT_CALENDAR_NAME:self.nameCalendar,
+                                                          EA_KEY_EVENT_END_TIME:[dateFormatter dateFromString:endReceivedInString],
+                                                          EA_KEY_EVENT_START_TIME:[dateFormatter dateFromString:startReceivedInString]
                                                           }];
             [dataJson addObject:eventDetail];
             
