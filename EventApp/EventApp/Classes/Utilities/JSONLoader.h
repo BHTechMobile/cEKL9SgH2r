@@ -5,8 +5,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Pods/AFNetworking/AFNetworking/AFHTTPRequestOperation.h"
-#import "Pods/AFNetworking/AFNetworking/AFHTTPRequestOperationManager.h"
+#import <AFNetworking/AFNetworking.h>
+
 typedef void (^SuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
 typedef void (^FailureBlock)(AFHTTPRequestOperation *operation, NSError *error);
 typedef void (^ProgressBlock)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite);
