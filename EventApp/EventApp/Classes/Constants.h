@@ -10,9 +10,25 @@
 #define SEGUE_INDENTIFIER @"viewEventDetails"
 #define SEGUE_INDENTIFIER_MAP_VIEW @"pushMapWebView"
 #define FONT_HELVETICA_BOLD @"Helvetica-Bold"
+#define FONT_SIZE_HELVETICA_BOLD 14
+#define MAIN_COLOR [UIColor colorWithRed:0.9608f green:0.2824f blue:0.1922f alpha:1]
 
 #define EAManagedObjectContext [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext]
 #define EAManagedObjectModel   [(AppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectModel]
+
+#define EA_KEY_ID @"eventId"
+#define EA_KEY_CONTENT_DESCRIPTION @"contentDescription"
+#define EA_KEY_CONTENT_TYPE @"contentType"
+#define EA_KEY_TITLE_NAME @"titleName"
+#define EA_KEY_TITLE_TYPE @"titleType"
+#define EA_KEY_LINK_REL @"linkRel"
+#define EA_KEY_LINK_TYPE @"linkType"
+#define EA_KEY_LINK_HREF @"linkHref"
+#define EA_KEY_EVENT_WHERE @"eventWhere"
+#define EA_KEY_EVENT_CREATED_BY @"eventCreatedBy"
+#define EA_KEY_EVENT_CALENDAR_NAME @"eventCalendarName"
+#define EA_KEY_EVENT_END_TIME @"eventEndTime"
+#define EA_KEY_EVENT_START_TIME @"eventStartTime"
 
 #define CIDS_MAIN_KEY @"cids"
 #define CALENDAR_EMBED_MAIN_KEY @"calendars%40startupdigest.com/private/embed"
@@ -58,9 +74,24 @@
 
 #define EAEVENTLIST_KEY_ID @"eventId"
 
+#define AlertLinkMap 22
+#define AlertLinkWeb 23
+#define AlertLinkMail 24
+
 #define HEIGHT_CELL_LIST_EVENT 55
+#define HEIGHT_CELL_DETAIL_EVENT 30
+#define SPACE_HEIGHT_CELL_DETAIL_EVENT 5
+#define SPACE_HEIGHT_CELL_DETAIL_EVENT_ 20
 #define WIDTH_CONTENT_CELL_DETAIL 240
+#define WIDTH_TITLE_CELL_DETAIL 290
 #define LENGTH_SHORT_DATE_TIME 10
+
+#define NO_KEY @"No"
+#define YES_KEY @"Yes"
+#define QS_MAP_TITLE @"Location Message!"
+#define QS_MAP @"Are you see location in maps? "
+#define QS_WEB_TITLE @"Link Message!"
+#define QS_WEB @"Are you go to the link? "
 
 /*CoreDataHelper*/
 #define EAKey_Id           @"id"
