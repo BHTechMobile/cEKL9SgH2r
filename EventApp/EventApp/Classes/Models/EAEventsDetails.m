@@ -39,9 +39,9 @@
 }
 
 + (EAEventsDetails *)eventsDetail {
-    EAEventsDetails *bodyPart = (EAEventsDetails *)[NSEntityDescription insertNewObjectForEntityForName:[EAEventsDetails description] inManagedObjectContext:EAManagedObjectContext];
+    EAEventsDetails *eventDetail = (EAEventsDetails *)[NSEntityDescription insertNewObjectForEntityForName:[EAEventsDetails description] inManagedObjectContext:EAManagedObjectContext];
     
-    return bodyPart;
+    return eventDetail;
 }
 
 + (EAEventsDetails *)eventsDetailByID:(NSString *)eventID {
