@@ -64,18 +64,6 @@
     return 1 + ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0) + ((self.eventsCreatedby.length > 0)?1:0) + ((self.eventsDescription.length > 0)?1:0) ;
 }
 
-+ (NSString *)dateStringFromString:(NSString *)sourceString
-                      sourceFormat:(NSString *)sourceFormat
-                 destinationFormat:(NSString *)destinationFormat
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-    [dateFormatter setDateFormat:sourceFormat];
-    NSDate *date = [dateFormatter dateFromString:sourceString];
-    [dateFormatter setDateFormat:destinationFormat];
-    return [dateFormatter stringFromDate:date];
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *tableCell = nil;
@@ -109,18 +97,29 @@
         NSString *startReceivedInString = self.eventsStartTime;
         NSString *endReceivedInString = self.eventsEndTime;
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        
-        [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS-HH:mm"];
-        NSDate *dt = [formatter dateFromString:endReceivedInString];
-        NSDate *dt2 = [formatter dateFromString:startReceivedInString];
-        
-        [formatter setDateStyle:NSDateFormatterFullStyle];
-        NSString *dateAsStringEnd = [formatter stringFromDate:dt];
-        NSString *dateAsStringStart = [formatter stringFromDate:dt2];
-        
-        NSLog(@"%@ - %@",dateAsStringStart, dateAsStringEnd);
-        
-        cell.contentDescription.text = [NSString stringWithFormat:@"From %@ \n to %@",dateAsStringStart ,dateAsStringEnd];
+        if(self.eventsStartTime.length > LENGTH_SHORT_DATE_TIME){
+            [formatter setDateFormat:FORMAT_DATE];
+            NSDate *dt = [formatter dateFromString:endReceivedInString];
+            NSDate *dt2 = [formatter dateFromString:startReceivedInString];
+            
+            [formatter setDateStyle:NSDateFormatterFullStyle];
+            NSString *dateAsStringEnd = [formatter stringFromDate:dt];
+            NSString *dateAsStringStart = [formatter stringFromDate:dt2];
+            
+            cell.contentDescription.text = [NSString stringWithFormat:@"From %@ \n to %@",dateAsStringStart ,dateAsStringEnd];
+        }
+        else{
+            [formatter setDateFormat:FORMAT_SHORT_DATE];
+            NSDate *dt = [formatter dateFromString:[endReceivedInString substringToIndex:LENGTH_SHORT_DATE_TIME]];
+            NSDate *dt2 = [formatter dateFromString:[startReceivedInString substringToIndex:LENGTH_SHORT_DATE_TIME]];
+            
+            [formatter setDateStyle:NSDateFormatterMediumStyle];
+            NSString *dateAsStringEnd = [formatter stringFromDate:dt];
+            NSString *dateAsStringStart = [formatter stringFromDate:dt2];
+            
+            cell.contentDescription.text = [NSString stringWithFormat:@"From %@ to %@",dateAsStringStart ,dateAsStringEnd];
+        }
+
 
         [cell.contentDescription sizeToFit];
         CGRect textFrame = cell.contentDescription.frame;
