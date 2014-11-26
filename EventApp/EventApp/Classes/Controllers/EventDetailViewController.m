@@ -14,8 +14,9 @@
 #import <MapKit/MapKit.h>
 #import "MapViewController.h"
 
-@interface EventDetailViewController ()<EventDetailMapTableViewCellDelegate>{
+@interface EventDetailViewController ()<EventDetailMapTableViewCellDelegate,UITextViewDelegate>{
     EventListModel *eventListModel;
+    NSURL *linktoWeb;
 }
 
 @end
@@ -27,6 +28,25 @@
     eventListModel = [EventListModel new];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    self.navigationItem.hidesBackButton = YES;
+    
+    self.navigationItem.title = self.event.titleName;
+    UIImage *backImage = [UIImage imageNamed:@"btn_back_cyan"];
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(0, 0, 15, 20)];
+    [backButton setBackgroundImage:backImage forState:UIControlStateNormal];
+    [backButton addTarget:self action:@selector(popBack) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc]initWithCustomView:backButton];
+    [self.navigationItem setLeftBarButtonItem:barButton];
+    
+}
+
+- (void)popBack{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -35,25 +55,30 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 40;
-    if (indexPath.row == 0){
+    CGFloat height = HEIGHT_CELL_DETAIL_EVENT;
+    if (indexPath.row == INDEX_PATH_ROW){
         EventDetailTableViewCell *cell = (EventDetailTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 5;
-    }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0)){
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
+    }
+    else if (indexPath.row == INDEX_PATH_ROW_){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 20;
-    }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)){
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT_;
+    }
+    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0 || [self.event.eventWhere isEqualToString:UNKNOWN_LOCATION])?1:0)){
         EventDetailMapTableViewCell *cell = (EventDetailMapTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.contentView.frame.size.height + cell.contentTitle.frame.size.height;
-    }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0)){
+    }
+    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0)?1:0 || [self.event.eventWhere isEqualToString:UNKNOWN_LOCATION])+ ((self.event.eventCalendarName.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 5;
-    }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0) + ((self.eventsCreatedby.length > 0)?1:0)){
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
+    }
+    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0)?1:0 || [self.event.eventWhere isEqualToString:UNKNOWN_LOCATION])+ ((self.event.eventCalendarName.length > 0)?1:0)+ ((self.event.eventCreatedBy.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 5;
-    }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0) + ((self.eventsCreatedby.length > 0)?1:0) + ((self.eventsDescription.length > 0)?1:0)){
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
+    }
+    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0)?1:0 || [self.event.eventWhere isEqualToString:UNKNOWN_LOCATION])+ ((self.event.eventCalendarName.length > 0)?1:0)+ ((self.event.eventCreatedBy.length > 0)?1:0) + ((self.event.contentDescription.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + 5;
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT_;
     }
     
     return height;
@@ -61,23 +86,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1 + ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0) + ((self.eventsCreatedby.length > 0)?1:0) + ((self.eventsDescription.length > 0)?1:0) ;
+    return INDEX_PATH_ROW__ + ((self.event.eventWhere.length > 0|| [self.event.eventWhere isEqualToString:UNKNOWN_LOCATION])?1:0)+ ((self.event.eventCalendarName.length > 0)?1:0) + ((self.event.eventCreatedBy.length > 0)?1:0) + ((self.event.contentDescription.length > 0)?1:0) ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *tableCell = nil;
-    if (indexPath.row == 0){
+    if (indexPath.row == INDEX_PATH_ROW){
         //Title
         EventDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventDetailTableViewCell_ID];
         if (cell == nil) {
             cell = [[EventDetailTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EventDetailTableViewCell_ID];
         }
-        [cell.contentDetailEvents setText:self.eventsTitle];
+        [cell.contentDetailEvents setText:self.event.titleName];
         cell.contentDetailEvents.font = [UIFont fontWithName:FONT_HELVETICA_BOLD size:14];
         [cell.contentDetailEvents sizeToFit];
         CGRect textFrame = cell.contentDetailEvents.frame;
-        textFrame.size.width = 290;
+        textFrame.size.width = WIDTH_TITLE_CELL_DETAIL;
         cell.contentDetailEvents.frame = textFrame;
         
         CGRect containerFrame = cell.contentDetailEvents.frame;
@@ -85,7 +110,8 @@
         cell.contentView.frame = containerFrame;
         
         tableCell = cell;
-    }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0)){
+    }
+    else if (indexPath.row == INDEX_PATH_ROW_){
         //Time
         EventDescriptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventDetailTableViewCell_ID];
         if (cell == nil) {
@@ -94,33 +120,18 @@
         
         cell.contentDescriptionLabel.text = TITLE_TIME;
         
-        NSString *startReceivedInString = self.eventsStartTime;
-        NSString *endReceivedInString = self.eventsEndTime;
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        if(self.eventsStartTime.length > LENGTH_SHORT_DATE_TIME){
-            [formatter setDateFormat:FORMAT_DATE];
-            NSDate *dt = [formatter dateFromString:endReceivedInString];
-            NSDate *dt2 = [formatter dateFromString:startReceivedInString];
-            
-            [formatter setDateStyle:NSDateFormatterFullStyle];
-            NSString *dateAsStringEnd = [formatter stringFromDate:dt];
-            NSString *dateAsStringStart = [formatter stringFromDate:dt2];
-            
-            cell.contentDescription.text = [NSString stringWithFormat:@"From %@ \n to %@",dateAsStringStart ,dateAsStringEnd];
-        }
-        else{
-            [formatter setDateFormat:FORMAT_SHORT_DATE];
-            NSDate *dt = [formatter dateFromString:[endReceivedInString substringToIndex:LENGTH_SHORT_DATE_TIME]];
-            NSDate *dt2 = [formatter dateFromString:[startReceivedInString substringToIndex:LENGTH_SHORT_DATE_TIME]];
-            
-            [formatter setDateStyle:NSDateFormatterMediumStyle];
-            NSString *dateAsStringEnd = [formatter stringFromDate:dt];
-            NSString *dateAsStringStart = [formatter stringFromDate:dt2];
-            
-            cell.contentDescription.text = [NSString stringWithFormat:@"From %@ to %@",dateAsStringStart ,dateAsStringEnd];
-        }
-
-
+        NSDate *startTime = self.event.eventStartTime;
+        NSDate *endTime = self.event.eventEndTime;
+        NSDateFormatter *dataFormatter = [[NSDateFormatter alloc]init];
+        [dataFormatter setDateFormat:FORMAT_DATE];
+        
+        [dataFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [dataFormatter setTimeStyle:NSDateFormatterShortStyle];
+        NSString *dateAsStringEnd = [dataFormatter stringFromDate:endTime];
+        NSString *dateAsStringStart = [dataFormatter stringFromDate:startTime];
+        
+        cell.contentDescription.text = [NSString stringWithFormat:FROM_TO,dateAsStringStart ,dateAsStringEnd];
+        
         [cell.contentDescription sizeToFit];
         CGRect textFrame = cell.contentDescription.frame;
         textFrame.size.width = WIDTH_CONTENT_CELL_DETAIL;
@@ -131,14 +142,15 @@
         cell.contentView.frame = containerFrame;
         
         tableCell = cell;
-    }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)){
+    }
+    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0 || [self.event.eventWhere isEqualToString:UNKNOWN_LOCATION])?1:0)){
         //Map
         EventDetailMapTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventDetailMapTableViewCell_ID];
         if (cell == nil) {
             cell = [[EventDetailMapTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EventDetailMapTableViewCell_ID];
         }
         if (cell.contentLocation.text.length==0) {
-            cell.contentLocation.text = [NSString stringWithFormat:@"%@",self.eventsLocation];
+            cell.contentLocation.text = [NSString stringWithFormat:@"%@",self.event.eventWhere];
         }
         
         [cell setDelegate:self];
@@ -163,32 +175,36 @@
         
         tableCell = cell;
         
-    }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0)){
+    }
+    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0|| [self.event.eventWhere isEqualToString:UNKNOWN_LOCATION])?1:0) + ((self.event.eventCalendarName.length > 0)?1:0)){
         //Calendar
         EventDescriptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventDetailTableViewCell_ID];
         if (cell == nil) {
             cell = [[EventDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EventDetailTableViewCell_ID];
         }
         cell.contentDescriptionLabel.text = TITLE_CALENDAR;
-        cell.contentDescription.text = [NSString stringWithFormat:@"%@",self.eventsCalendar];
+        cell.contentDescription.text = [NSString stringWithFormat:@"%@",self.event.eventCalendarName];
         tableCell = cell;
-    }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0) + ((self.eventsCreatedby.length > 0)?1:0)){
+    }
+    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0|| [self.event.eventWhere isEqualToString:UNKNOWN_LOCATION])?1:0)+
+              ((self.event.eventCalendarName.length > 0)?1:0) + ((self.event.eventCreatedBy.length > 0)?1:0)){
         //Created by
         EventDescriptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventDetailTableViewCell_ID];
         if (cell == nil) {
             cell = [[EventDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EventDetailTableViewCell_ID];
         }
         cell.contentDescriptionLabel.text = TITLE_CREATED_BY;
-        cell.contentDescription.text = [NSString stringWithFormat:@"%@",self.eventsCreatedby];
+        cell.contentDescription.text = [NSString stringWithFormat:@"%@",self.event.eventCreatedBy];
         tableCell = cell;
-    }else if (indexPath.row == ((self.eventsStartTime.length > 0)?1:0) + ((self.eventsLocation.length > 0)?1:0)+ ((self.eventsCalendar.length > 0)?1:0) + ((self.eventsCreatedby.length > 0)?1:0) + ((self.eventsDescription.length > 0)?1:0)){
+    }
+    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0|| [self.event.eventWhere isEqualToString:UNKNOWN_LOCATION])?1:0)+ ((self.event.eventCalendarName.length > 0)?1:0) + ((self.event.eventCreatedBy.length > 0)?1:0) + ((self.event.contentDescription.length > 0)?1:0)){
         //Description
         EventDescriptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventDescriptionTableViewCell_ID];
         if (cell == nil) {
             cell = [[EventDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EventDescriptionTableViewCell_ID];
         }
         cell.contentDescriptionLabel.text = TITLE_DESCRIPTION;
-        [cell.contentDescription setText:[NSString stringWithFormat:@"%@",self.eventsDescription]];
+        [cell.contentDescription setText:[NSString stringWithFormat:@"%@",self.event.contentDescription]];
         
         [cell.contentDescription sizeToFit];
         CGRect textFrame = cell.contentDescription.frame;
@@ -198,7 +214,7 @@
         CGRect containerFrame = cell.contentDescription.frame;
         containerFrame.size.height = cell.contentDescription.frame.size.height;
         cell.contentView.frame = containerFrame;
-        
+        [cell.contentDescription setDelegate:self];
         tableCell = cell;
     }
     
@@ -208,16 +224,59 @@
 #pragma mark - Link google maps
 
 - (void)clickedButtonLocation:(UIButton *)btnLocation{
-//    [self performSegueWithIdentifier:SEGUE_INDENTIFIER_MAP_VIEW sender:nil];
-//    MapViewController *mapViewController = [[MapViewController alloc] init];
-//    
-//    [mapViewController.mapContentView loadRequest:[NSURLRequest requestWithURL:
-//                            [NSURL URLWithString: @"http://www.google.com"]]];
     
-    NSString *location = self.eventsLocation;
-    NSString *url = [NSString stringWithFormat: @"http://maps.google.com/maps?q=%@",[location stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+    UIAlertView *messageAlert = [[UIAlertView alloc] initWithTitle:QS_MAP_TITLE
+                                                           message:QS_MAP
+                                                          delegate:self
+                                                 cancelButtonTitle:NO_KEY
+                                                 otherButtonTitles:YES_KEY,nil];
+    [messageAlert setTag:AlertLinkMap];
+    [messageAlert show];
 }
+
+#pragma mark - Alert View
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    switch (alertView.tag) {
+        case AlertLinkMap:{
+            if (buttonIndex == 1)
+            {
+                NSString *location = self.eventsLocation;
+                NSString *url = [NSString stringWithFormat: @"http://maps.google.com/maps?q=%@",[location stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+            }else if (buttonIndex == 0){
+                NSLog(@"NO");
+            }
+        }
+            break;
+        case AlertLinkWeb:{
+            if (buttonIndex == 1)
+            {
+                [[UIApplication sharedApplication] openURL:linktoWeb];
+            }else if (buttonIndex == 0){
+                NSLog(@"NO");
+            }
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange{
+    linktoWeb = URL;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:QS_WEB_TITLE
+                                                        message:QS_WEB_TITLE
+                                                       delegate:self
+                                              cancelButtonTitle:NO_KEY
+                                              otherButtonTitles:YES_KEY,nil];
+    [alertView setTag:AlertLinkWeb];
+    [alertView show];
+    
+    return NO;
+}
+
 
 #pragma mark - Custom Methods
 
