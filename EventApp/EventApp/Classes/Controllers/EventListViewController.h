@@ -6,10 +6,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface EventListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate>
 
 - (IBAction)refreshListEventsAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *listEventsTable;
-@property (strong, nonatomic) NSArray *getListEvents;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchEventBar;
+@property (strong, nonatomic) NSMutableArray *searchListEvents;
 
 @end

@@ -36,6 +36,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search Event" id="qUv-AU-FKQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="Gr1-kM-KOS" id="GOo-4D-kxT"/>
+                                    </connections>
+                                </searchBar>
                                 <connections>
                                     <outlet property="dataSource" destination="Gr1-kM-KOS" id="7oR-kv-V8k"/>
                                     <outlet property="delegate" destination="Gr1-kM-KOS" id="Bcu-cF-NrK"/>
@@ -60,10 +68,21 @@
                     </navigationItem>
                     <connections>
                         <outlet property="listEventsTable" destination="12p-Dq-RGn" id="Sql-w6-5sV"/>
+                        <outlet property="searchDisplayController" destination="8Fg-49-d4P" id="aI8-4R-2Wd"/>
+                        <outlet property="searchEventBar" destination="qUv-AU-FKQ" id="bub-cv-h9v"/>
                         <segue destination="Ab7-kU-Ndd" kind="push" identifier="viewEventDetails" id="TBZ-qf-N9Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HSA-aM-hnm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="8Fg-49-d4P">
+                    <connections>
+                        <outlet property="delegate" destination="Gr1-kM-KOS" id="kPv-Pq-OoT"/>
+                        <outlet property="searchBar" destination="qUv-AU-FKQ" id="NIP-XO-P3X"/>
+                        <outlet property="searchContentsController" destination="Gr1-kM-KOS" id="cuR-sd-lUA"/>
+                        <outlet property="searchResultsDataSource" destination="Gr1-kM-KOS" id="3j5-BF-vnB"/>
+                        <outlet property="searchResultsDelegate" destination="Gr1-kM-KOS" id="vX4-DN-3KP"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="193" y="316"/>
         </scene>
