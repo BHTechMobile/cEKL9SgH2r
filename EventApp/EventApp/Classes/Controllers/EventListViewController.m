@@ -23,6 +23,7 @@
     NSDictionary *dictEvents;
     NSArray *arrayEvents;
     EventListModel *eventListModel;
+    EventDetailViewController *eventDetailViewController;
 }
 
 - (void)viewDidLoad {
@@ -62,18 +63,29 @@
     }
     EAEventsDetails* eventsDetails = [arrayEvents objectAtIndex:indexPath.row];
     cell.titleEvents.text = eventsDetails.titleName;
-    cell.timeTitleEvents.text = [NSString stringWithFormat:@"From %@ to %@",eventsDetails.eventStartTime ,eventsDetails.eventEndTime];
+    
+    NSDate *startTime = eventsDetails.eventStartTime;
+    NSDate *endTime = eventsDetails.eventEndTime;
+    NSDateFormatter *dataFormatter = [[NSDateFormatter alloc]init];
+    [dataFormatter setDateFormat:FORMAT_SHORT_DATE];
+    
+    [dataFormatter setDateStyle:NSDateFormatterMediumStyle];
+    NSString *dateAsStringEnd = [dataFormatter stringFromDate:endTime];
+    NSString *dateAsStringStart = [dataFormatter stringFromDate:startTime];
+    
+    cell.timeTitleEvents.text = [NSString stringWithFormat:@"From %@ to %@",dateAsStringStart ,dateAsStringEnd];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:SEGUE_INDENTIFIER sender:nil];
+    
+    [eventDetailViewController setEvent:[arrayEvents objectAtIndex:indexPath.row]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:SEGUE_INDENTIFIER]) {
-        EventDetailViewController *edvc = (EventDetailViewController *)[segue destinationViewController];
-        [edvc setEvent:nil];
+        eventDetailViewController = [segue destinationViewController];
     }
 }
 
