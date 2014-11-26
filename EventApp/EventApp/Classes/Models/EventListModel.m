@@ -137,6 +137,30 @@
     
 }
 
+-(NSString*)descriptionFromContent:(NSString*)content{
+    NSString * resultString = @"";
+    @try {
+        content = [content stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+        content = [content stringByReplacingOccurrencesOfString:@"&#39;" withString:@"\'"];
+        content = [content stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""];
+        content = [content stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
+
+        NSArray *contents = [content componentsSeparatedByString:@"Event Description: "];
+        if (contents.count >1) {
+            resultString = contents[1];
+        }
+        else{
+            resultString = content;
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception);
+    }
+    @finally {
+        return resultString;
+    }
+}
+
 - (void)insertData:(NSArray *)arrayEvents{
     NSMutableArray * events = [NSMutableArray new];
     for (int i = 0; i < arrayEvents.count; i++) {
@@ -155,7 +179,7 @@
         
         EAEventsDetails* eventDetail = [EAEventsDetails eventsDetailFromDictionary:@{
                                                                                      @"eventId":[[[arrayEvents objectAtIndex:i] valueForKey:ID_MAIN_KEY] valueForKey:DETAILS_KEY],
-                                                                                     @"contentDescription":[[dic valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY],
+                                                                                     @"contentDescription":[self descriptionFromContent:[[dic valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY]],
                                                                                      @"contentType":[[dic valueForKey:CONTENT_MAIN_KEY] valueForKey:TYPE_MAIN_KEY],
                                                                                      @"titleName":[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:DETAILS_KEY],
                                                                                      @"titleType":[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:TYPE_MAIN_KEY],
