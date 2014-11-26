@@ -12,7 +12,6 @@
 #import "EventDescriptionTableViewCell.h"
 #import "EventListModel.h"
 #import <MapKit/MapKit.h>
-#import "MapViewController.h"
 
 @interface EventDetailViewController ()<EventDetailMapTableViewCellDelegate,UITextViewDelegate>{
     EventListModel *eventListModel;
