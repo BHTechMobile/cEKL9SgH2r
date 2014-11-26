@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="aDA-CQ-bv3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="aDA-CQ-bv3">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
@@ -101,7 +100,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="N5R-yx-jzr">
                         <barButtonItem key="backBarButtonItem" title="Back" id="9kM-e4-mFF"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="uJ0-tB-OAn"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="uJ0-tB-OAn">
+                            <connections>
+                                <action selector="addEvent:" destination="Ab7-kU-Ndd" id="Cbl-Pl-GDY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="vhY-nx-dqG" kind="push" identifier="pushMapWebView" id="jXo-P0-Rrx"/>

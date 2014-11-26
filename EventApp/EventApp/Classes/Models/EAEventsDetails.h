@@ -12,7 +12,7 @@
 
 @interface EAEventsDetails : NSManagedObject
 
-@property (nonatomic, retain) NSString * titleType;
+@property (nonatomic, retain) NSString * eventStoreId;
 @property (nonatomic, retain) NSString * titleName;
 @property (nonatomic, retain) NSString * linkType;
 @property (nonatomic, retain) NSString * linkRel;

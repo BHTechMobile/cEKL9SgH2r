@@ -29,6 +29,7 @@
 #define EA_KEY_EVENT_CALENDAR_NAME @"eventCalendarName"
 #define EA_KEY_EVENT_END_TIME @"eventEndTime"
 #define EA_KEY_EVENT_START_TIME @"eventStartTime"
+#define EA_KEY_EVENT_STORE_ID @"eventStoreId"
 
 #define CIDS_MAIN_KEY @"cids"
 #define CALENDAR_EMBED_MAIN_KEY @"calendars%40startupdigest.com/private/embed"

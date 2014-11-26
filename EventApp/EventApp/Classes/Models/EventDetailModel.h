@@ -5,7 +5,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <EventKit/EventKit.h>
+#import "EAEventsDetails.h"
 
 @interface EventDetailModel : NSObject
+
+@property (nonatomic,strong) EAEventsDetails* event;
+
+-(void)saveEventToCalendar;
 
 @end

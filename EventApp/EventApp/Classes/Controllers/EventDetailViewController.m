@@ -51,6 +51,19 @@
     [super didReceiveMemoryWarning];
 }
 
+-(EAEventsDetails*)event{
+    return _eventDetailModel.event;
+}
+
+-(void)setEvent:(EAEventsDetails *)event{
+    _eventDetailModel = [[EventDetailModel alloc] init];
+    _eventDetailModel.event = event;
+}
+
+- (IBAction)addEvent:(id)sender {
+    [_eventDetailModel saveEventToCalendar];
+}
+
 #pragma mark - Table View Delegate - Datasource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -242,7 +255,7 @@
         case AlertLinkMap:{
             if (buttonIndex == 1)
             {
-                NSString *location = self.eventsLocation;
+                NSString *location = self.event.eventWhere;
                 NSString *url = [NSString stringWithFormat: @"http://maps.google.com/maps?q=%@",[location stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
             }else if (buttonIndex == 0){

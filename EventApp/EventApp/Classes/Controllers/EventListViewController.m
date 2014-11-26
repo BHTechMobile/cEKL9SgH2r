@@ -79,7 +79,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self performSegueWithIdentifier:SEGUE_INDENTIFIER sender:nil];
-    
     [eventDetailViewController setEvent:[arrayEvents objectAtIndex:indexPath.row]];
 }
 

@@ -11,7 +11,7 @@
 
 @implementation EAEventsDetails
 
-@dynamic titleType;
+@dynamic eventStoreId;
 @dynamic titleName;
 @dynamic linkType;
 @dynamic linkRel;
@@ -30,8 +30,17 @@
 + (EAEventsDetails *)eventsDetailFromDictionary:(NSDictionary *)dict {
     EAEventsDetails *managedObject = (EAEventsDetails *)[EAEventsDetails managedObjectWithKey:EAEVENTLIST_KEY_ID andValue:[dict valueForKey:EAEVENTLIST_KEY_ID]];
     
+    NSString * currentStoreId = @"";
+    
     if (managedObject == nil) {
         managedObject = (EAEventsDetails *)[NSEntityDescription insertNewObjectForEntityForName:[EAEventsDetails description] inManagedObjectContext:EAManagedObjectContext];
+    }
+    else{
+        currentStoreId = managedObject.eventStoreId;
+    }
+    
+    if (currentStoreId && ![currentStoreId isEqualToString:@""]) {
+        managedObject.eventStoreId = currentStoreId;
     }
     
     [managedObject updateFromDict:dict];

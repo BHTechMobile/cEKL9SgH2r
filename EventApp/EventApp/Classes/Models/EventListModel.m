@@ -182,7 +182,7 @@
                                                                                      EA_KEY_CONTENT_DESCRIPTION:[self descriptionFromContent:[[dic valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY]],
                                                                                      EA_KEY_CONTENT_TYPE:[[dic valueForKey:CONTENT_MAIN_KEY] valueForKey:TYPE_MAIN_KEY],
                                                                                      EA_KEY_TITLE_NAME:[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:DETAILS_KEY],
-                                                                                     EA_KEY_TITLE_TYPE:[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:TYPE_MAIN_KEY],
+                                                                                     EA_KEY_EVENT_STORE_ID:@"",
                                                                                      EA_KEY_LINK_REL:[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:LINK_REL_MAIN_KEY],
                                                                                      EA_KEY_LINK_TYPE:[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:TYPE_MAIN_KEY],
                                                                                      EA_KEY_LINK_HREF:[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:LINK_HREF_MAIN_KEY],
