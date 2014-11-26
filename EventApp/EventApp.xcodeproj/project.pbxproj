@@ -34,7 +34,6 @@
 		CEC6A39F1A242FEB0023B98E /* EventListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6A3961A242FEB0023B98E /* EventListTableViewCell.m */; };
 		CEC6A3A91A2430370023B98E /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6A3A41A2430370023B98E /* EventDetailViewController.m */; };
 		CEC6A3AA1A2430370023B98E /* EventListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6A3A61A2430370023B98E /* EventListViewController.m */; };
-		CEC6A3AB1A2430370023B98E /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6A3A81A2430370023B98E /* MapViewController.m */; };
 		D688151D3150BA1DC1C19D84 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC528A196AC02FDC342D5EF /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -97,8 +96,6 @@
 		CEC6A3A41A2430370023B98E /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
 		CEC6A3A51A2430370023B98E /* EventListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListViewController.h; sourceTree = "<group>"; };
 		CEC6A3A61A2430370023B98E /* EventListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListViewController.m; sourceTree = "<group>"; };
-		CEC6A3A71A2430370023B98E /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		CEC6A3A81A2430370023B98E /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		CEC6A3AC1A24303F0023B98E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		DA0E4D3CDD285FBBE43AD99E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -286,8 +283,6 @@
 				CEC6A3A41A2430370023B98E /* EventDetailViewController.m */,
 				CEC6A3A51A2430370023B98E /* EventListViewController.h */,
 				CEC6A3A61A2430370023B98E /* EventListViewController.m */,
-				CEC6A3A71A2430370023B98E /* MapViewController.h */,
-				CEC6A3A81A2430370023B98E /* MapViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -449,7 +444,6 @@
 				CEC6A37B1A242FB10023B98E /* EAEventsDetails.m in Sources */,
 				CE895CCF1A199AA500B0E6BB /* main.m in Sources */,
 				CEC6A3721A242FA90023B98E /* NSManagedObject+Utilities.m in Sources */,
-				CEC6A3AB1A2430370023B98E /* MapViewController.m in Sources */,
 				CE895CD51A199AA500B0E6BB /* EventApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
