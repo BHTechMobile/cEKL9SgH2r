@@ -11,14 +11,12 @@
 #import "JSONLoader.h"
 #import "CoreDataHelpers.h"
 
-@implementation EventListModel{
-    EAEventsDetails *eaEventsDetails;
-    NSDictionary *dictEvents;
-}
+@implementation EventListModel
 
 -(id)init{
     self = [super init];
     if (self) {
+        _arrayEvents = [NSMutableArray new];
         self.nameCalendar = @"Silicon Valley StartupDigest";
         self.createdBy = @"startupdigest.com";
 
@@ -26,12 +24,38 @@
     return self;
 }
 
+-(NSInteger)todayIndex{
+    for (int i=0; i<_arrayEvents.count; ++i) {
+        EAEventsDetails *event = _arrayEvents[i];
+        if ([self isToday:event.eventStartTime]) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+-(BOOL)isToday:(NSDate*)date{
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *eventDateComponents = [cal components:( NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay ) fromDate:date];
+
+    NSDateComponents *todayComponents = [cal components:( NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay ) fromDate:[NSDate date]];
+    
+    if (eventDateComponents.day == todayComponents.day && eventDateComponents.month == todayComponents.month && eventDateComponents.year == todayComponents.year) {
+        return YES;
+    }
+    return NO;
+}
+
 - (void)getEventsSuccess:(void(^)())success failure:(void(^)(NSError* error))failure{
     [JSONLoader requestDataSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self insertData:[[responseObject valueForKey:@"feed"] valueForKey:@"entry"]];
+            _arrayEvents = [self convertData:[[responseObject valueForKey:@"feed"] valueForKey:@"entry"]];
             if (success) {
                 success();
+            }
+            NSError *error = nil;
+            if (![EAManagedObjectContext save:&error]) {
+                NSLog(@"Problem saving: %@", [error localizedDescription]);
             }
         });
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -114,6 +138,9 @@
             [endDateFormatter setDateFormat:FORMAT_DATE_NO_MINUTE];
         }
         
+        [startDateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+        [endDateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+        
         *startTime = [startDateFormatter dateFromString:startTimeString];
         *endTime = [endDateFormatter dateFromString:endTimeString];
         
@@ -161,7 +188,17 @@
     }
 }
 
-- (void)insertData:(NSArray *)arrayEvents{
+-(NSString*)updateTitle:(NSString*)title{
+    title = [title stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    title = [title stringByReplacingOccurrencesOfString:@"&#39;" withString:@"\'"];
+    title = [title stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+    title = [title stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@""];
+    title = [title stringByReplacingOccurrencesOfString:@"<br />" withString:@""];
+    return title;
+}
+
+
+- (NSArray *)convertData:(NSArray *)arrayEvents{
     NSMutableArray * events = [NSMutableArray new];
     for (int i = 0; i < arrayEvents.count; i++) {
         
@@ -181,7 +218,7 @@
                                                                                      EA_KEY_ID:[[[arrayEvents objectAtIndex:i] valueForKey:ID_MAIN_KEY] valueForKey:DETAILS_KEY],
                                                                                      EA_KEY_CONTENT_DESCRIPTION:[self descriptionFromContent:[[dic valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY]],
                                                                                      EA_KEY_CONTENT_TYPE:[[dic valueForKey:CONTENT_MAIN_KEY] valueForKey:TYPE_MAIN_KEY],
-                                                                                     EA_KEY_TITLE_NAME:[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:DETAILS_KEY],
+                                                                                     EA_KEY_TITLE_NAME:[self updateTitle:[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:DETAILS_KEY]],
                                                                                      EA_KEY_EVENT_STORE_ID:@"",
                                                                                      EA_KEY_LINK_REL:[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:LINK_REL_MAIN_KEY],
                                                                                      EA_KEY_LINK_TYPE:[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:TYPE_MAIN_KEY],
@@ -194,15 +231,8 @@
                                                                                      }];
         [events addObject:eventDetail];
     }
-    
-    NSError *error = nil;
-    if (![EAManagedObjectContext save:&error]) {
-        NSLog(@"Problem saving: %@", [error localizedDescription]);
-    }
-}
-
-- (NSArray *)arrayEvents{
-    return [CoreDataHelpers allEvents];
+    return events;
+   
 }
 
 @end

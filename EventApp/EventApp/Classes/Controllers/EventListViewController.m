@@ -65,35 +65,33 @@
     if (cell == nil) {
         cell = [[EventListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
+    EAEventsDetails* eventsDetails;
+    
     if (tableView == self.searchDisplayController.searchResultsTableView) {
-        EAEventsDetails* eventsDetails = [self.searchListEvents objectAtIndex:indexPath.row];
-        cell.titleEvents.text = eventsDetails.titleName;
-        
-        NSDate *startTime = eventsDetails.eventStartTime;
-        NSDate *endTime = eventsDetails.eventEndTime;
-        NSDateFormatter *dataFormatter = [[NSDateFormatter alloc]init];
-        [dataFormatter setDateFormat:FORMAT_SHORT_DATE];
-        
-        [dataFormatter setDateStyle:NSDateFormatterMediumStyle];
-        NSString *dateAsStringEnd = [dataFormatter stringFromDate:endTime];
-        NSString *dateAsStringStart = [dataFormatter stringFromDate:startTime];
-        
-        cell.timeTitleEvents.text = [NSString stringWithFormat:@"From %@ to %@",dateAsStringStart ,dateAsStringEnd];
+        eventsDetails = [self.searchListEvents objectAtIndex:indexPath.row];
     } else {
-        EAEventsDetails* eventsDetails = [arrayEvents objectAtIndex:indexPath.row];
-        cell.titleEvents.text = eventsDetails.titleName;
-        
-        NSDate *startTime = eventsDetails.eventStartTime;
-        NSDate *endTime = eventsDetails.eventEndTime;
-        NSDateFormatter *dataFormatter = [[NSDateFormatter alloc]init];
-        [dataFormatter setDateFormat:FORMAT_SHORT_DATE];
-        
-        [dataFormatter setDateStyle:NSDateFormatterMediumStyle];
-        NSString *dateAsStringEnd = [dataFormatter stringFromDate:endTime];
-        NSString *dateAsStringStart = [dataFormatter stringFromDate:startTime];
-        
-        cell.timeTitleEvents.text = [NSString stringWithFormat:@"From %@ to %@",dateAsStringStart ,dateAsStringEnd];
+        eventsDetails = [arrayEvents objectAtIndex:indexPath.row];
     }
+    if ([eventListModel isToday:eventsDetails.eventStartTime]) {
+        cell.titleEvents.textColor = MAIN_COLOR;
+    }
+    else{
+        cell.titleEvents.textColor = [UIColor blackColor];
+    }
+    
+    cell.titleEvents.text = eventsDetails.titleName;
+    
+    NSDate *startTime = eventsDetails.eventStartTime;
+    NSDate *endTime = eventsDetails.eventEndTime;
+    NSDateFormatter *dataFormatter = [[NSDateFormatter alloc]init];
+    [dataFormatter setDateFormat:FORMAT_SHORT_DATE];
+    
+    [dataFormatter setDateStyle:NSDateFormatterMediumStyle];
+    NSString *dateAsStringEnd = [dataFormatter stringFromDate:endTime];
+    NSString *dateAsStringStart = [dataFormatter stringFromDate:startTime];
+    
+    cell.timeTitleEvents.text = [NSString stringWithFormat:@"From %@ to %@",dateAsStringStart ,dateAsStringEnd];
+    
     return cell;
 }
 
@@ -118,6 +116,10 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         arrayEvents = [NSMutableArray arrayWithArray:eventListModel.arrayEvents];
         [self.listEventsTable reloadData];
+        NSInteger todayIndex = eventListModel.todayIndex;
+        if (todayIndex!=-1) {
+            [self.listEventsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:todayIndex inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        }
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSLog(@"error:%@",error);

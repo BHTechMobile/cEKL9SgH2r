@@ -12,6 +12,8 @@
 @property (nonatomic, retain) NSString *createdBy;
 @property (nonatomic, retain) NSString *nameCalendar;
 
-- (void)getEventsSuccess:(void(^)())success failure:(void(^)(NSError* error))failure;
+-(BOOL)isToday:(NSDate*)date;
 
+- (void)getEventsSuccess:(void(^)())success failure:(void(^)(NSError* error))failure;
+- (NSInteger)todayIndex;
 @end
