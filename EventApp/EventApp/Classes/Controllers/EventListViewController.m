@@ -34,8 +34,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    self.navigationController.navigationBar.tintColor  = [UIColor redColor];
-    [[[self navigationController] navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor redColor]}];
+    self.navigationController.navigationBar.tintColor  = MAIN_COLOR;
+    [[[self navigationController] navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName: MAIN_COLOR}];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -178,19 +178,19 @@
         }
         
         EAEventsDetails* eventDetail = [EAEventsDetails eventsDetailFromDictionary:@{
-                                                                                     @"eventId":[[[arrayEvents objectAtIndex:i] valueForKey:ID_MAIN_KEY] valueForKey:DETAILS_KEY],
-                                                                                     @"contentDescription":[self descriptionFromContent:[[dic valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY]],
-                                                                                     @"contentType":[[dic valueForKey:CONTENT_MAIN_KEY] valueForKey:TYPE_MAIN_KEY],
-                                                                                     @"titleName":[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:DETAILS_KEY],
-                                                                                     @"titleType":[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:TYPE_MAIN_KEY],
-                                                                                     @"linkRel":[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:LINK_REL_MAIN_KEY],
-                                                                                     @"linkType":[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:TYPE_MAIN_KEY],
-                                                                                     @"linkHref":[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:LINK_HREF_MAIN_KEY],
-                                                                                     @"eventWhere":locationString,
-                                                                                     @"eventCreatedBy":self.createdBy,
-                                                                                     @"eventCalendarName":self.nameCalendar,
-                                                                                     @"eventEndTime":endDate,
-                                                                                     @"eventStartTime":startDate
+                                                                                     EA_KEY_ID:[[[arrayEvents objectAtIndex:i] valueForKey:ID_MAIN_KEY] valueForKey:DETAILS_KEY],
+                                                                                     EA_KEY_CONTENT_DESCRIPTION:[self descriptionFromContent:[[dic valueForKey:CONTENT_MAIN_KEY]valueForKey:DETAILS_KEY]],
+                                                                                     EA_KEY_CONTENT_TYPE:[[dic valueForKey:CONTENT_MAIN_KEY] valueForKey:TYPE_MAIN_KEY],
+                                                                                     EA_KEY_TITLE_NAME:[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:DETAILS_KEY],
+                                                                                     EA_KEY_TITLE_TYPE:[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:TYPE_MAIN_KEY],
+                                                                                     EA_KEY_LINK_REL:[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:LINK_REL_MAIN_KEY],
+                                                                                     EA_KEY_LINK_TYPE:[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:TYPE_MAIN_KEY],
+                                                                                     EA_KEY_LINK_HREF:[[[dic valueForKey:LINK_MAIN_KEY] firstObject]valueForKey:LINK_HREF_MAIN_KEY],
+                                                                                     EA_KEY_EVENT_WHERE:locationString,
+                                                                                     EA_KEY_EVENT_CREATED_BY:self.createdBy,
+                                                                                     EA_KEY_EVENT_CALENDAR_NAME:self.nameCalendar,
+                                                                                     EA_KEY_EVENT_END_TIME:endDate,
+                                                                                     EA_KEY_EVENT_START_TIME:startDate
                                                                                      }];
         [events addObject:eventDetail];
     }
