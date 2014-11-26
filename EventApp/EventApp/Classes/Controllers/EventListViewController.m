@@ -29,11 +29,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     eventListModel = [EventListModel new];
-    [self refreshListEventsAction:nil];
-    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"checkFirst"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"checkFirst"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        self.refreshListEvents.enabled = NO;
+        [self refreshListEventsAction:nil];
+    }else{
+        arrayEvents = [NSMutableArray arrayWithArray:eventListModel.arrayEvents];
+        [self updateData];
+    }
+}
+
+-(void)updateData{
+    [self.listEventsTable reloadData];
+    NSInteger todayIndex = eventListModel.todayIndex;
+    if (todayIndex!=-1) {
+        [self.listEventsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:todayIndex inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    }
+    self.refreshListEvents.enabled = YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.listEventsTable reloadData];
     self.navigationController.navigationBar.tintColor  = MAIN_COLOR;
     [[[self navigationController] navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName: MAIN_COLOR}];
 }
@@ -112,17 +130,15 @@
 
 - (IBAction)refreshListEventsAction:(id)sender {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.refreshListEvents.enabled = NO;
     [eventListModel getEventsSuccess:^{
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         arrayEvents = [NSMutableArray arrayWithArray:eventListModel.arrayEvents];
-        [self.listEventsTable reloadData];
-        NSInteger todayIndex = eventListModel.todayIndex;
-        if (todayIndex!=-1) {
-            [self.listEventsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:todayIndex inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
-        }
+        [self updateData];
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        NSLog(@"error:%@",error);
+        self.refreshListEvents.enabled = YES;
+//        NSLog(@"error:%@",error);
     }];
 }
 
@@ -131,9 +147,8 @@
 - (void)filterContentForSearchText:(NSString *)searchText scope:(NSString *)scope
 {
     [self.searchListEvents removeAllObjects];
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"SELF.titleName contains[c] %@",searchText];
-    self.searchListEvents = [NSMutableArray arrayWithArray:[arrayEvents filteredArrayUsingPredicate:resultPredicate]];
-}
+    NSPredicate *resultPredicateTitle = [NSPredicate predicateWithFormat:@"(SELF.titleName contains[c] %@) OR (SELF.eventWhere contains[c] %@ ) OR (SELF.contentDescription contains[c] %@) OR (SELF.eventCalendarName contains[c] %@) OR (SELF.eventCreatedBy contains[c] %@)",searchText,searchText,searchText,searchText,searchText];
+    self.searchListEvents = [NSMutableArray arrayWithArray:[arrayEvents filteredArrayUsingPredicate:resultPredicateTitle]];}
 
 #pragma mark - UISearchDisplayController Delegate Methods
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString

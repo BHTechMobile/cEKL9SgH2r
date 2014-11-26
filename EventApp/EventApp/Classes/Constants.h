@@ -98,7 +98,7 @@
 #define QS_MAP_TITLE @"Location Message!"
 #define QS_MAP @"Are you see location in maps? "
 #define QS_WEB_TITLE @"Link Message!"
-#define QS_WEB @"Are you go to the link? "
+#define QS_WEB @"Do you want open web browser ? "
 
 /*CoreDataHelper*/
 #define EAKey_Id           @"id"
