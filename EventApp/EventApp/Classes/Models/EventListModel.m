@@ -16,13 +16,14 @@
 -(id)init{
     self = [super init];
     if (self) {
-        _arrayEvents = [NSMutableArray new];
+        _arrayEvents = [CoreDataHelpers allEvents];
         self.nameCalendar = @"Silicon Valley StartupDigest";
         self.createdBy = @"startupdigest.com";
 
     }
     return self;
 }
+
 
 -(NSInteger)todayIndex{
     for (int i=0; i<_arrayEvents.count; ++i) {
@@ -104,7 +105,7 @@
             
         }
         *timeZone = hasGMT?resultArray[hasStartTime+hasEndTime]:@"0";
-        *location = hasLocation?resultArray[hasStartTime+hasEndTime+hasLocation]:@"Unknown Location";
+        *location = hasLocation?resultArray[hasStartTime+hasEndTime+hasGMT]:@"Unknown Location";
         //        * = hasStatus?resultArray[hasStartTime+hasEndTime+hasGMT+hasLocation];
         
         NSDateFormatter *startDateFormatter = [[NSDateFormatter alloc] init];
