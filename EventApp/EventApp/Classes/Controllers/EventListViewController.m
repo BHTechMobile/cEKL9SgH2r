@@ -54,6 +54,7 @@
     [self.listEventsTable reloadData];
     self.navigationController.navigationBar.tintColor  = MAIN_COLOR;
     [[[self navigationController] navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName: MAIN_COLOR}];
+    self.title = @"BayArea Startup Events";
 }
 
 - (void)didReceiveMemoryWarning {
