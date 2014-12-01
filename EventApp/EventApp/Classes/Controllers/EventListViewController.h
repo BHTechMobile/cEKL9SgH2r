@@ -13,5 +13,10 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshListEvents;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchEventBar;
 @property (strong, nonatomic) NSMutableArray *searchListEvents;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchListViewEvents;
+- (IBAction)searchListViewEvents:(id)sender;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightSearchBarConstaints;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpaceSearchBarConstaints;
 
 @end
