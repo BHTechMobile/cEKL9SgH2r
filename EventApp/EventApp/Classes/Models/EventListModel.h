@@ -16,4 +16,7 @@
 
 - (void)getEventsSuccess:(void(^)())success failure:(void(^)(NSError* error))failure;
 - (NSInteger)todayIndex;
+
++ (BOOL)isFuture:(NSDate*)date;
+
 @end

@@ -24,7 +24,6 @@
     return self;
 }
 
-
 -(NSInteger)todayIndex{
     for (int i=0; i<_arrayEvents.count; ++i) {
         EAEventsDetails *event = _arrayEvents[i];
@@ -44,6 +43,22 @@
     if (eventDateComponents.day == todayComponents.day && eventDateComponents.month == todayComponents.month && eventDateComponents.year == todayComponents.year) {
         return YES;
     }
+    return NO;
+}
+
++ (BOOL)isFuture:(NSDate*)date{
+    if (!date) {
+        return NO;
+    }
+    NSCalendar *cal = [NSCalendar currentCalendar];
+    NSDateComponents *eventDateComponents = [cal components:( NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay ) fromDate:date];
+    
+    NSDateComponents *todayComponents = [cal components:( NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay ) fromDate:[NSDate date]];
+    
+    if ((eventDateComponents.year > todayComponents.year) || (eventDateComponents.year == todayComponents.year && eventDateComponents.month > todayComponents.month) || (eventDateComponents.year == todayComponents.year && eventDateComponents.month == todayComponents.month && eventDateComponents.day >= todayComponents.day)) {
+        return YES;
+    }
+    
     return NO;
 }
 
@@ -162,7 +177,6 @@
         
     }
     
-    
 }
 
 -(NSString*)descriptionFromContent:(NSString*)content{
@@ -198,7 +212,6 @@
     return title;
 }
 
-
 - (NSArray *)convertData:(NSArray *)arrayEvents{
     NSMutableArray * events = [NSMutableArray new];
     for (int i = 0; i < arrayEvents.count; i++) {
@@ -213,6 +226,10 @@
         [self breakString:[[dic valueForKey:SUMMARY_KEY] valueForKey:DETAILS_KEY] toStartTime:&startDate andEndTime:&endDate location:&locationString timeZone:&timeZoneString];
         if ([locationString isEqualToString:@"Unknow Location"]) {
             NSLog(@"%@",[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:DETAILS_KEY]);
+        }
+        
+        if (![[self class] isFuture:startDate]) {
+            continue;
         }
         
         EAEventsDetails* eventDetail = [EAEventsDetails eventsDetailFromDictionary:@{

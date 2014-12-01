@@ -4,6 +4,7 @@
 
 #import "CoreDataHelpers.h"
 #import "EAEventsDetails.h"
+#import "EventListModel.h"
 
 @implementation CoreDataHelpers
 
@@ -91,7 +92,14 @@
 #pragma mark - EAEventsDetails
 
 + (NSArray *)allEvents {
-	return [CoreDataHelpers allMangedObjectInEntity:[EAEventsDetails description] orderBy:@"eventStartTime"];
+    NSArray * coreDataResult = [CoreDataHelpers allMangedObjectInEntity:[EAEventsDetails description] orderBy:@"eventStartTime"];
+    NSMutableArray* result = [NSMutableArray new];
+    for (int i = 0; i<coreDataResult.count; ++i) {
+        if ([EventListModel isFuture:((EAEventsDetails*)coreDataResult[i]).eventStartTime]) {
+            [result addObject:coreDataResult[i]];
+        }
+    }
+	return result;
 }
 
 + (NSArray *)eventsWithIdContaining:(NSString *)eventId {
