@@ -147,7 +147,6 @@
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         self.refreshListEvents.enabled = YES;
-//        NSLog(@"error:%@",error);
     }];
 }
 
@@ -174,11 +173,9 @@
 
 
 - (IBAction)searchListViewEvents:(id)sender {
-        //_searchEventBar.showsCancelButton
     _heightSearchBarConstaints.constant = HEIGHT_SEARCH_BAR_CONSTAINT_DEFAULT;
     _topSpaceSearchBarConstaints.constant = TOP_SPACE_SEARCH_BAR_CONSTAINT_DEFAULT;
     [self.view layoutIfNeeded];
-    //self.searchEventBar.hidden = NO;
     [self.searchDisplayController setActive:YES animated:YES];
     
 }
