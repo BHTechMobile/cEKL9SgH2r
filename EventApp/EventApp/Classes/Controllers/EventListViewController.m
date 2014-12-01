@@ -52,6 +52,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.listEventsTable reloadData];
+    self.title = @"BayArea Startup Events";
     self.navigationController.navigationBar.tintColor  = MAIN_COLOR;
     [[[self navigationController] navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName: MAIN_COLOR}];
 }
