@@ -15,6 +15,9 @@
 #import "EventListModel.h"
 #import <MBProgressHUD.h>
 
+
+#define HEIGHT_SEARCH_BAR_CONSTAINT_DEFAULT 44
+#define TOP_SPACE_SEARCH_BAR_CONSTAINT_DEFAULT 20
 @interface EventListViewController ()
 
 @end
@@ -38,6 +41,10 @@
         arrayEvents = [NSMutableArray arrayWithArray:eventListModel.arrayEvents];
         [self updateData];
     }
+    
+    _heightSearchBarConstaints.constant = 0;
+    [self.view layoutIfNeeded];
+    
 }
 
 -(void)updateData{
@@ -55,6 +62,8 @@
     self.title = @"BayArea Startup Events";
     self.navigationController.navigationBar.tintColor  = MAIN_COLOR;
     [[[self navigationController] navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName: MAIN_COLOR}];
+    [[UISearchBar appearance] setTintColor: MAIN_COLOR];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -139,7 +148,6 @@
     } failure:^(NSError *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         self.refreshListEvents.enabled = YES;
-//        NSLog(@"error:%@",error);
     }];
 }
 
@@ -163,6 +171,16 @@
     [self filterContentForSearchText:self.searchDisplayController.searchBar.text scope:[[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
     return YES;
 }
+
+
+- (IBAction)searchListViewEvents:(id)sender {
+    _heightSearchBarConstaints.constant = HEIGHT_SEARCH_BAR_CONSTAINT_DEFAULT;
+    _topSpaceSearchBarConstaints.constant = TOP_SPACE_SEARCH_BAR_CONSTAINT_DEFAULT;
+    [self.view layoutIfNeeded];
+    [self.searchDisplayController setActive:YES animated:YES];
+    
+}
+
 
 
 @end
