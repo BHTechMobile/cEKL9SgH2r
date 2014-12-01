@@ -15,6 +15,9 @@
 #import "EventListModel.h"
 #import <MBProgressHUD.h>
 
+
+#define HEIGHT_SEARCH_BAR_CONSTAINT_DEFAULT 44
+#define TOP_SPACE_SEARCH_BAR_CONSTAINT_DEFAULT 20
 @interface EventListViewController ()
 
 @end
@@ -38,6 +41,10 @@
         arrayEvents = [NSMutableArray arrayWithArray:eventListModel.arrayEvents];
         [self updateData];
     }
+    
+    _heightSearchBarConstaints.constant = 0;
+    [self.view layoutIfNeeded];
+    
 }
 
 -(void)updateData{
@@ -55,6 +62,8 @@
     self.title = @"BayArea Startup Events";
     self.navigationController.navigationBar.tintColor  = MAIN_COLOR;
     [[[self navigationController] navigationBar] setTitleTextAttributes:@{NSForegroundColorAttributeName: MAIN_COLOR}];
+    [[UISearchBar appearance] setTintColor: MAIN_COLOR];
+    //[self.listEventsTable setContentOffset:CGPointMake(0, 90)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -164,5 +173,33 @@
     return YES;
 }
 
+
+- (IBAction)searchListViewEvents:(id)sender {
+        //_searchEventBar.showsCancelButton
+    _heightSearchBarConstaints.constant = HEIGHT_SEARCH_BAR_CONSTAINT_DEFAULT;
+    _topSpaceSearchBarConstaints.constant = TOP_SPACE_SEARCH_BAR_CONSTAINT_DEFAULT;
+    [self.view layoutIfNeeded];
+    //self.searchEventBar.hidden = NO;
+    [self.searchDisplayController setActive:YES animated:YES];
+    
+}
+
+#pragma mark - SearchBar delegate
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    //self.searchEventBar.hidden= YES;
+//    _topSpaceSearchBarConstaints.constant = TOP_SPACE_SEARCH_BAR_CONSTAINT_DEFAULT;
+//    _heightSearchBarConstaints.constant = 0;
+//    [self.view layoutIfNeeded];
+    
+}
+
+- (void)searchDisplayControllerDidEndSearch:(UISearchDisplayController *)controller
+{
+//    _heightSearchBarConstaints.constant = 0;
+//    _topSpaceSearchBarConstaints.constant = TOP_SPACE_SEARCH_BAR_CONSTAINT_DEFAULT;
+//    [self.view layoutIfNeeded];
+//    //self.searchEventBar.hidden=YES;
+}
 
 @end
