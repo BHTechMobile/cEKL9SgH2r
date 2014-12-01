@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="aDA-CQ-bv3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="aDA-CQ-bv3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -33,20 +33,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search Event" translatesAutoresizingMaskIntoConstraints="NO" id="qUv-AU-FKQ">
-                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="bUj-xK-zmk"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Gr1-kM-KOS" id="GOo-4D-kxT"/>
-                                </connections>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="12p-Dq-RGn">
-                                <rect key="frame" x="0.0" y="108" width="320" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search Event" id="qUv-AU-FKQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="Gr1-kM-KOS" id="GOo-4D-kxT"/>
+                                    </connections>
+                                </searchBar>
                                 <connections>
                                     <outlet property="dataSource" destination="Gr1-kM-KOS" id="7oR-kv-V8k"/>
                                     <outlet property="delegate" destination="Gr1-kM-KOS" id="Bcu-cF-NrK"/>
@@ -56,34 +54,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="12p-Dq-RGn" secondAttribute="trailing" id="8sU-f0-V5f"/>
-                            <constraint firstItem="qUv-AU-FKQ" firstAttribute="top" secondItem="glU-xd-Ohl" secondAttribute="top" constant="64" id="bMt-uk-wVJ"/>
-                            <constraint firstAttribute="trailing" secondItem="qUv-AU-FKQ" secondAttribute="trailing" id="ejB-nc-5w6"/>
-                            <constraint firstItem="12p-Dq-RGn" firstAttribute="top" secondItem="qUv-AU-FKQ" secondAttribute="bottom" id="gPG-mR-xQR"/>
                             <constraint firstItem="12p-Dq-RGn" firstAttribute="leading" secondItem="glU-xd-Ohl" secondAttribute="leading" id="kb4-EA-6sd"/>
-                            <constraint firstAttribute="bottom" secondItem="12p-Dq-RGn" secondAttribute="bottom" id="l4b-Ar-CAa"/>
-                            <constraint firstItem="qUv-AU-FKQ" firstAttribute="leading" secondItem="glU-xd-Ohl" secondAttribute="leading" id="yWg-ge-fdf"/>
+                            <constraint firstItem="lCE-Om-Xcb" firstAttribute="top" secondItem="12p-Dq-RGn" secondAttribute="bottom" id="lOC-xZ-ZcD"/>
+                            <constraint firstItem="12p-Dq-RGn" firstAttribute="top" secondItem="glU-xd-Ohl" secondAttribute="top" id="twW-tN-7yw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="All Events" id="D4h-aD-ifc">
-                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="35K-dV-VU7">
-                            <connections>
-                                <action selector="searchListViewEvents:" destination="Gr1-kM-KOS" id="Qae-e2-aSK"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="9Lu-yp-CXc">
                             <connections>
-                                <action selector="refreshListEventsAction:" destination="Gr1-kM-KOS" id="hbt-QX-scH"/>
+                                <action selector="refreshListEventsAction:" destination="Gr1-kM-KOS" id="pJv-x6-8d5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="heightSearchBarConstaints" destination="bUj-xK-zmk" id="X11-KW-U9C"/>
                         <outlet property="listEventsTable" destination="12p-Dq-RGn" id="Sql-w6-5sV"/>
                         <outlet property="refreshListEvents" destination="9Lu-yp-CXc" id="9c9-pV-8Gy"/>
                         <outlet property="searchDisplayController" destination="8Fg-49-d4P" id="aI8-4R-2Wd"/>
                         <outlet property="searchEventBar" destination="qUv-AU-FKQ" id="bub-cv-h9v"/>
-                        <outlet property="searchListViewEvents" destination="35K-dV-VU7" id="faO-d4-DnQ"/>
-                        <outlet property="topSpaceSearchBarConstaints" destination="bMt-uk-wVJ" id="3nt-EQ-Hxt"/>
                         <segue destination="Ab7-kU-Ndd" kind="push" identifier="viewEventDetails" id="TBZ-qf-N9Q"/>
                     </connections>
                 </viewController>
