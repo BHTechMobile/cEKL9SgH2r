@@ -95,9 +95,14 @@
     NSArray * coreDataResult = [CoreDataHelpers allMangedObjectInEntity:[EAEventsDetails description] orderBy:@"eventStartTime"];
     NSMutableArray* result = [NSMutableArray new];
     for (int i = 0; i<coreDataResult.count; ++i) {
-        if ([EventListModel isFuture:((EAEventsDetails*)coreDataResult[i]).eventStartTime]) {
+        
+        if ([EventListModel isFuture:((EAEventsDetails*)coreDataResult[i]).eventStartTime]){
             [result addObject:coreDataResult[i]];
         }
+        else if ([EventListModel isFuture:((EAEventsDetails*)coreDataResult[i]).eventEndTime]) {
+            [result addObject:coreDataResult[i]];
+        }
+      
     }
 	return result;
 }
