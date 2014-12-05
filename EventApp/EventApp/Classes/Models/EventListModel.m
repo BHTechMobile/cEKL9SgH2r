@@ -27,7 +27,10 @@
 -(NSInteger)todayIndex{
     for (int i=0; i<_arrayEvents.count; ++i) {
         EAEventsDetails *event = _arrayEvents[i];
-        if ([self isToday:event.eventStartTime]) {
+        if ([self isToday:event.eventStartTime]){
+            return i;
+        }
+        else if ([EventListModel isFuture:event.eventEndTime]){
             return i;
         }
     }
@@ -57,8 +60,7 @@
     
     if ((eventDateComponents.year > todayComponents.year) || (eventDateComponents.year == todayComponents.year && eventDateComponents.month > todayComponents.month) || (eventDateComponents.year == todayComponents.year && eventDateComponents.month == todayComponents.month && eventDateComponents.day >= todayComponents.day)) {
         return YES;
-    }
-    
+    }    
     return NO;
 }
 
@@ -227,8 +229,8 @@
         if ([locationString isEqualToString:@"Unknow Location"]) {
             NSLog(@"%@",[[dic valueForKey:TITLE_MAIN_KEY] valueForKey:DETAILS_KEY]);
         }
-        
-        if (![[self class] isFuture:startDate]) {
+
+        if (![[self class] isFuture:endDate]) {
             continue;
         }
         

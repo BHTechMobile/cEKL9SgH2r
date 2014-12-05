@@ -103,10 +103,11 @@
     if ([eventListModel isToday:eventsDetails.eventStartTime]) {
         cell.titleEvents.textColor = MAIN_COLOR;
     }
-    else{
+    else if  ([EventListModel isFuture:eventsDetails.eventEndTime]) {
         cell.titleEvents.textColor = [UIColor blackColor];
     }
-    
+   
+   
     cell.titleEvents.text = eventsDetails.titleName;
     
     NSDate *startTime = eventsDetails.eventStartTime;
