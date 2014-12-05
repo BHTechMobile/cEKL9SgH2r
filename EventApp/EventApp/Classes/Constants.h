@@ -100,6 +100,7 @@
 #define QS_WEB_TITLE @"Link Message!"
 #define QS_WEB @"Do you want open web browser ? "
 
+#define myAlertViewsTag 0
 /*CoreDataHelper*/
 #define EAKey_Id           @"id"
 #define EAKey_Title        @"title"
