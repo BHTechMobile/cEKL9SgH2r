@@ -103,7 +103,7 @@
     if ([eventListModel isToday:eventsDetails.eventStartTime]) {
         cell.titleEvents.textColor = MAIN_COLOR;
     }
-    else if  ([eventListModel isFutureDayEnd:eventsDetails.eventEndTime]) {
+    else if  ([EventListModel isFuture:eventsDetails.eventEndTime]) {
         cell.titleEvents.textColor = [UIColor blackColor];
     }
    

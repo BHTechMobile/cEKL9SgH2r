@@ -30,13 +30,13 @@
         if ([self isToday:event.eventStartTime]){
             return i;
         }
-        else if ([self isFutureDayEnd:event.eventEndTime]){
+        else if ([EventListModel isFuture:event.eventEndTime]){
             return i;
         }
-       
     }
     return -1;
 }
+
 -(BOOL)isToday:(NSDate*)date{
     NSCalendar *cal = [NSCalendar currentCalendar];
     NSDateComponents *eventDateComponents = [cal components:( NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay ) fromDate:date];
@@ -46,23 +46,6 @@
     if (eventDateComponents.day == todayComponents.day && eventDateComponents.month == todayComponents.month && eventDateComponents.year == todayComponents.year) {
         return YES;
     }
-    return NO;
-}
-
-
-- (BOOL)isFutureDayEnd:(NSDate*)date{
-    if (!date) {
-        return NO;
-    }
-    NSCalendar *cal = [NSCalendar currentCalendar];
-    NSDateComponents *eventDateComponents = [cal components:( NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay ) fromDate:date];
-    
-    NSDateComponents *todayComponents = [cal components:( NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay ) fromDate:[NSDate date]];
-    
-    if ((eventDateComponents.year > todayComponents.year) || (eventDateComponents.year == todayComponents.year && eventDateComponents.month > todayComponents.month) || (eventDateComponents.year == todayComponents.year && eventDateComponents.month == todayComponents.month && eventDateComponents.day >= todayComponents.day)) {
-        return YES;
-    }
-    
     return NO;
 }
 
@@ -77,8 +60,7 @@
     
     if ((eventDateComponents.year > todayComponents.year) || (eventDateComponents.year == todayComponents.year && eventDateComponents.month > todayComponents.month) || (eventDateComponents.year == todayComponents.year && eventDateComponents.month == todayComponents.month && eventDateComponents.day >= todayComponents.day)) {
         return YES;
-    }
-    
+    }    
     return NO;
 }
 

@@ -5,9 +5,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface EventListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate,UISearchDisplayDelegate>
-
 - (IBAction)refreshListEventsAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *listEventsTable;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *refreshListEvents;
@@ -18,5 +16,4 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightSearchBarConstaints;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topSpaceSearchBarConstaints;
-
 @end

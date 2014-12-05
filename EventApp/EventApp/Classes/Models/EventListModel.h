@@ -13,7 +13,6 @@
 @property (nonatomic, retain) NSString *nameCalendar;
 
 - (BOOL)isToday:(NSDate*)date;
-- (BOOL)isFutureDayEnd:(NSDate*)date;
 - (void)getEventsSuccess:(void(^)())success failure:(void(^)(NSError* error))failure;
 - (NSInteger)todayIndex;
 + (BOOL)isFuture:(NSDate*)date;
