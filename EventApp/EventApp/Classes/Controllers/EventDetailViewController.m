@@ -80,15 +80,7 @@
         EventDetailMapTableViewCell *cell = (EventDetailMapTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.contentView.frame.size.height + cell.contentTitle.frame.size.height;
     }
-    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0)?1:0)+ ((self.event.eventCalendarName.length > 0)?1:0)){
-        EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
-    }
-    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0)?1:0)+ ((self.event.eventCalendarName.length > 0)?1:0)+ ((self.event.eventCreatedBy.length > 0)?1:0)){
-        EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT;
-    }
-    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0)?1:0)+ ((self.event.eventCalendarName.length > 0)?1:0)+ ((self.event.eventCreatedBy.length > 0)?1:0) + ((self.event.contentDescription.length > 0)?1:0)){
+    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0)?1:0)+ ((self.event.contentDescription.length > 0)?1:0)){
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT_;
     }
@@ -98,7 +90,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return INDEX_PATH_ROW__ + ((self.event.eventWhere.length > 0)?1:0)+ ((self.event.eventCalendarName.length > 0)?1:0) + ((self.event.eventCreatedBy.length > 0)?1:0) + ((self.event.contentDescription.length > 0)?1:0) ;
+    return INDEX_PATH_ROW__ + ((self.event.eventWhere.length > 0)?1:0)+ ((self.event.contentDescription.length > 0)?1:0) ;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -194,29 +186,7 @@
         tableCell = cell;
         
     }
-    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0)?1:0) + ((self.event.eventCalendarName.length > 0)?1:0)){
-        //Calendar
-        EventDescriptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventDetailTableViewCell_ID];
-        if (cell == nil) {
-            cell = [[EventDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EventDetailTableViewCell_ID];
-        }
-        cell.contentDescriptionLabel.text = TITLE_CALENDAR;
-        cell.contentDescription.text = [NSString stringWithFormat:@"%@",self.event.eventCalendarName];
-        tableCell = cell;
-    }
-    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0)?1:0)+
-              ((self.event.eventCalendarName.length > 0)?1:0) + ((self.event.eventCreatedBy.length > 0)?1:0)){
-        //Created by
-        EventDescriptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventDetailTableViewCell_ID];
-        if (cell == nil) {
-            cell = [[EventDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EventDetailTableViewCell_ID];
-        }
-        cell.contentDescriptionLabel.text = TITLE_CREATED_BY;
-        cell.contentDescription.text = [NSString stringWithFormat:@"%@",self.event.eventCreatedBy];
-        [cell.contentDescription setDelegate:self];
-        tableCell = cell;
-    }
-    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0)?1:0)+ ((self.event.eventCalendarName.length > 0)?1:0) + ((self.event.eventCreatedBy.length > 0)?1:0) + ((self.event.contentDescription.length > 0)?1:0)){
+    else if (indexPath.row == INDEX_PATH_ROW_ + ((self.event.eventWhere.length > 0)?1:0) + ((self.event.contentDescription.length > 0)?1:0)){
         //Description
         EventDescriptionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventDescriptionTableViewCell_ID];
         if (cell == nil) {
