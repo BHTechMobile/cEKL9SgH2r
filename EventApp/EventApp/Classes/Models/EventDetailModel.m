@@ -55,7 +55,7 @@
         });
     }];
 }
-#pragma mark - Alert View
+#pragma mark - Alert View delegate 
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -64,6 +64,7 @@
         [[UIApplication sharedApplication] openURL:[NSURL  URLWithString:UIApplicationOpenSettingsURLString]];
     }
 }
+#pragma mark-Show Messages
 
 -(void)showMessage:(NSString*)message{
     dispatch_async(dispatch_get_main_queue(), ^{
