@@ -101,6 +101,8 @@
 #define QS_WEB @"Do you want open web browser ? "
 
 #define myAlertViewsTag 0
+#define TAG_ALERT_SHOW_IOS_8 0
+#define TAG_ALERT_SHOW_IOS_7 1
 /*CoreDataHelper*/
 #define EAKey_Id           @"id"
 #define EAKey_Title        @"title"
@@ -111,4 +113,5 @@
 
 #define LogError(error) NSLog(@"%s - Error %@", __PRETTY_FUNCTION__, error)
 
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #endif
