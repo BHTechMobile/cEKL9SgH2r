@@ -10,10 +10,12 @@
 #import "EventDetailTableViewCell.h"
 #import "EventDetailMapTableViewCell.h"
 #import "EventDescriptionTableViewCell.h"
+#import "EventShareFacebookTableViewCell.h"
 #import "EventListModel.h"
 #import <MapKit/MapKit.h>
+#import "EventDetailModel.h"
 
-@interface EventDetailViewController ()<EventDetailMapTableViewCellDelegate,UITextViewDelegate>{
+@interface EventDetailViewController ()<EventDetailMapTableViewCellDelegate,EventShareFacebookTableViewCellDelegate,UITextViewDelegate>{
     EventListModel *eventListModel;
     NSURL *linktoWeb;
 }
@@ -84,13 +86,17 @@
         EventDescriptionTableViewCell *cell = (EventDescriptionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
         return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT_;
     }
+    else{
+        EventShareFacebookTableViewCell *cell = (EventShareFacebookTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+        return cell.contentView.frame.size.height + SPACE_HEIGHT_CELL_DETAIL_EVENT_;
+    }
     
     return height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return INDEX_PATH_ROW__ + ((self.event.eventWhere.length > 0)?1:0)+ ((self.event.contentDescription.length > 0)?1:0) ;
+    return INDEX_PATH_ROW__ + ((self.event.eventWhere.length > 0)?1:0)+ ((self.event.contentDescription.length > 0)?1:0) + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -206,7 +212,22 @@
         [cell.contentDescription setDelegate:self];
         tableCell = cell;
     }
-    
+    else{
+        EventShareFacebookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventShareFacebookTableViewCell_ID];
+        if (cell == nil) {
+            cell = [[EventShareFacebookTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EventShareFacebookTableViewCell_ID];
+        }
+        [cell setDelegate:self];
+        [cell.sharefbButton setTag:indexPath.row];
+        CGRect textFrame = cell.sharefbButton.frame;
+        textFrame.size.width = WIDTH_TITLE_CELL_DETAIL;
+        cell.sharefbButton.frame = textFrame;
+        
+        CGRect containerFrame = cell.sharefbButton.frame;
+        containerFrame.size.height = cell.sharefbButton.frame.size.height;
+        cell.contentView.frame = containerFrame;
+        tableCell = cell;
+    }
     return tableCell;
 }
 
@@ -221,6 +242,12 @@
                                                  otherButtonTitles:YES_KEY,nil];
     [messageAlert setTag:AlertLinkMap];
     [messageAlert show];
+}
+
+#pragma mark - button shareFB
+
+- (void)clickedButtonShareFb:(UIButton *)btnShareFb{
+    [_eventDetailModel shareFacebookButton];
 }
 
 #pragma mark - Alert View

@@ -67,6 +67,7 @@
 #define EventDetailTableViewCell_ID @"EventDetailTableViewCell"
 #define EventDetailMapTableViewCell_ID @"EventDetailMapTableViewCell"
 #define EventDescriptionTableViewCell_ID @"EventDescriptionTableViewCell"
+#define EventShareFacebookTableViewCell_ID @"EventShareFacebookTableViewCell"
 
 #define TITLE_TIME @"Time"
 #define TITLE_LOCATION @"Location"
@@ -91,7 +92,7 @@
 #define SPACE_HEIGHT_CELL_DETAIL_EVENT 5
 #define SPACE_HEIGHT_CELL_DETAIL_EVENT_ 20
 #define WIDTH_CONTENT_CELL_DETAIL 240
-#define WIDTH_TITLE_CELL_DETAIL 290
+#define WIDTH_TITLE_CELL_DETAIL 250
 
 #define NO_KEY @"No"
 #define YES_KEY @"Yes"
@@ -101,6 +102,7 @@
 #define QS_WEB @"Do you want open web browser ? "
 
 #define myAlertViewsTag 0
+#define TAG_ALERT_SHOW_FACEBOOK 2
 #define TAG_ALERT_SHOW_IOS_8 0
 #define TAG_ALERT_SHOW_IOS_7 1
 /*CoreDataHelper*/

@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		643017961A416A8400CDAC85 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 643017951A416A8400CDAC85 /* facebook@2x.png */; };
+		6430179A1A416C7C00CDAC85 /* EventShareFacebookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 643017981A416C7C00CDAC85 /* EventShareFacebookTableViewCell.m */; };
+		6430179B1A416C7C00CDAC85 /* EventShareFacebookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 643017991A416C7C00CDAC85 /* EventShareFacebookTableViewCell.xib */; };
+		643017A31A4180CD00CDAC85 /* sharefb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 643017A21A4180CD00CDAC85 /* sharefb@2x.png */; };
 		646AC8831A353BE400B59232 /* location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 646AC8821A353BE400B59232 /* location@2x.png */; };
+		64AB4C591A3EDD5300883B12 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64AB4C581A3EDD5300883B12 /* Social.framework */; };
+		64AB4C5B1A3EE13500883B12 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64AB4C5A1A3EE13500883B12 /* Accounts.framework */; };
 		9F7B7B551A257B7900DABC28 /* btn_back_cyan@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F7B7B531A257B7900DABC28 /* btn_back_cyan@2x.png */; };
 		CE895CCF1A199AA500B0E6BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE895CCE1A199AA500B0E6BB /* main.m */; };
 		CE895CD21A199AA500B0E6BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE895CD11A199AA500B0E6BB /* AppDelegate.m */; };
@@ -49,7 +55,14 @@
 
 /* Begin PBXFileReference section */
 		06E92D15D571D92AA76A698C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		643017951A416A8400CDAC85 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
+		643017971A416C7C00CDAC85 /* EventShareFacebookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventShareFacebookTableViewCell.h; sourceTree = "<group>"; };
+		643017981A416C7C00CDAC85 /* EventShareFacebookTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventShareFacebookTableViewCell.m; sourceTree = "<group>"; };
+		643017991A416C7C00CDAC85 /* EventShareFacebookTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventShareFacebookTableViewCell.xib; sourceTree = "<group>"; };
+		643017A21A4180CD00CDAC85 /* sharefb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sharefb@2x.png"; sourceTree = "<group>"; };
 		646AC8821A353BE400B59232 /* location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location@2x.png"; sourceTree = "<group>"; };
+		64AB4C581A3EDD5300883B12 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		64AB4C5A1A3EE13500883B12 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		9F7B7B531A257B7900DABC28 /* btn_back_cyan@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_back_cyan@2x.png"; sourceTree = "<group>"; };
 		9FD409E21A1DE3490062F9C6 /* EventApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EventApp-Prefix.pch"; sourceTree = "<group>"; };
 		AAC528A196AC02FDC342D5EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +118,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64AB4C5B1A3EE13500883B12 /* Accounts.framework in Frameworks */,
+				64AB4C591A3EDD5300883B12 /* Social.framework in Frameworks */,
 				D688151D3150BA1DC1C19D84 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,6 +137,8 @@
 		7868FF26DCD86E506F40CA0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				64AB4C5A1A3EE13500883B12 /* Accounts.framework */,
+				64AB4C581A3EDD5300883B12 /* Social.framework */,
 				AAC528A196AC02FDC342D5EF /* libPods.a */,
 			);
 			name = Frameworks;
@@ -225,13 +242,13 @@
 			isa = PBXGroup;
 			children = (
 				CEC6A3731A242FB10023B98E /* EAEventsDetails.h */,
-				CEC6A3741A242FB10023B98E /* EAEventsDetails.m */,
 				CEC6A3751A242FB10023B98E /* EventDetailModel.h */,
 				CEC6A3761A242FB10023B98E /* EventDetailModel.m */,
 				CEC6A3771A242FB10023B98E /* EventListModel.h */,
 				CEC6A3781A242FB10023B98E /* EventListModel.m */,
 				CEC6A3791A242FB10023B98E /* EventListTableViewCellModel.h */,
 				CEC6A37A1A242FB10023B98E /* EventListTableViewCellModel.m */,
+				CEC6A3741A242FB10023B98E /* EAEventsDetails.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -251,6 +268,9 @@
 				CEC6A3951A242FEB0023B98E /* EventListTableViewCell.h */,
 				CEC6A3961A242FEB0023B98E /* EventListTableViewCell.m */,
 				CEC6A3821A242FC00023B98E /* EventListTableViewCell.xib */,
+				643017971A416C7C00CDAC85 /* EventShareFacebookTableViewCell.h */,
+				643017981A416C7C00CDAC85 /* EventShareFacebookTableViewCell.m */,
+				643017991A416C7C00CDAC85 /* EventShareFacebookTableViewCell.xib */,
 			);
 			path = UIs;
 			sourceTree = "<group>";
@@ -269,6 +289,8 @@
 		CE895CFA1A199B1200B0E6BB /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				643017A21A4180CD00CDAC85 /* sharefb@2x.png */,
+				643017951A416A8400CDAC85 /* facebook@2x.png */,
 				DD2804CE1A3705C100CC7FC4 /* iTunesArtwork@2x.png */,
 				646AC8821A353BE400B59232 /* location@2x.png */,
 				9F7B7B531A257B7900DABC28 /* btn_back_cyan@2x.png */,
@@ -370,11 +392,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				643017A31A4180CD00CDAC85 /* sharefb@2x.png in Resources */,
 				CE895CDB1A199AA500B0E6BB /* Main.storyboard in Resources */,
 				DD2804CF1A3705C100CC7FC4 /* iTunesArtwork@2x.png in Resources */,
+				6430179B1A416C7C00CDAC85 /* EventShareFacebookTableViewCell.xib in Resources */,
 				CE895CE01A199AA500B0E6BB /* LaunchScreen.xib in Resources */,
 				CEC6A3851A242FC00023B98E /* EventDetailTableViewCell.xib in Resources */,
 				CEC6A3861A242FC00023B98E /* EventListTableViewCell.xib in Resources */,
+				643017961A416A8400CDAC85 /* facebook@2x.png in Resources */,
 				CE895CDD1A199AA500B0E6BB /* Images.xcassets in Resources */,
 				9F7B7B551A257B7900DABC28 /* btn_back_cyan@2x.png in Resources */,
 				CEC6A3841A242FC00023B98E /* EventDetailMapTableViewCell.xib in Resources */,
@@ -430,6 +455,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6430179A1A416C7C00CDAC85 /* EventShareFacebookTableViewCell.m in Sources */,
 				CE895CD21A199AA500B0E6BB /* AppDelegate.m in Sources */,
 				CEC6A3AA1A2430370023B98E /* EventListViewController.m in Sources */,
 				CEC6A39B1A242FEB0023B98E /* EventDescriptionTableViewCell.m in Sources */,
@@ -571,6 +597,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tran Vu Viet Anh (N2AZ5MXD3Y)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EventApp",
+				);
 				GCC_PREFIX_HEADER = "EventApp/EventApp-Prefix.pch";
 				INFOPLIST_FILE = EventApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -589,6 +619,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tran Vu Viet Anh (N2AZ5MXD3Y)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EventApp",
+				);
 				GCC_PREFIX_HEADER = "EventApp/EventApp-Prefix.pch";
 				INFOPLIST_FILE = EventApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

@@ -5,6 +5,7 @@
 //
 
 #import "EventDetailModel.h"
+#import <Social/Social.h>
 
 @implementation EventDetailModel
 
@@ -55,7 +56,65 @@
         });
     }];
 }
-#pragma mark - Alert View delegate 
+
+- (void)shareFacebookButton{
+    NSString *title = self.event.titleName;
+    NSDate *startTime = self.event.eventStartTime;
+    NSDate *endTime = self.event.eventEndTime;
+    NSDateFormatter *dataFormatter = [[NSDateFormatter alloc]init];
+    [dataFormatter setDateFormat:FORMAT_DATE];
+    
+    [dataFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dataFormatter setTimeStyle:NSDateFormatterShortStyle];
+    NSString *dateAsStringEnd = [dataFormatter stringFromDate:endTime];
+    NSString *dateAsStringStart = [dataFormatter stringFromDate:startTime];
+    NSString *location = self.event.eventWhere;
+    NSString *message =[NSString
+                        stringWithFormat:@"Event Title: %@.\n Start-Time: %@.\n End-Time: %@.\n Location: %@. "
+                        ,title,dateAsStringStart,dateAsStringEnd,location];
+    
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        
+        SLComposeViewController *mySLComposerSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        [mySLComposerSheet setInitialText:message];
+        [mySLComposerSheet setCompletionHandler:^(SLComposeViewControllerResult result) {
+            
+            switch (result) {
+                case SLComposeViewControllerResultCancelled:{
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"Could not post on your wall" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                    [alert show];
+                    NSLog(@"Post Canceled");
+                    break;
+                }
+                case SLComposeViewControllerResultDone:{
+                    NSLog(@"Post Sucessful");
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Success" message:@"Posted succesfully on your wall" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+                    [alert show];
+                    break;
+                }
+                default:
+                    break;
+            }
+        }];
+        UIViewController *activeController = [UIApplication sharedApplication].keyWindow.rootViewController;
+        if ([activeController isKindOfClass:[UINavigationController class]]) {
+            activeController = [(UINavigationController*) activeController visibleViewController];
+        }
+            [activeController presentViewController:mySLComposerSheet animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Facebook Account"
+                                                            message:@"There are no Facebook account configured.You can add or create a Facebook account in Settings."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:nil, nil];
+            
+        alert.tag = TAG_ALERT_SHOW_FACEBOOK;
+        [alert show];
+    }
+}
+#pragma mark - Alert View delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
