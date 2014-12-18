@@ -70,7 +70,7 @@
     NSString *dateAsStringStart = [dataFormatter stringFromDate:startTime];
     NSString *location = self.event.eventWhere;
     NSString *message =[NSString
-                        stringWithFormat:@"Event Title: %@.\n Start-Time: %@.\n End-Time: %@.\n Location: %@. "
+                        stringWithFormat:@"Event %@ start from %@.\n to %@.\n at %@"
                         ,title,dateAsStringStart,dateAsStringEnd,location];
     
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
