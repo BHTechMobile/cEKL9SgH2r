@@ -13,5 +13,6 @@
 @property (nonatomic,strong) EAEventsDetails* event;
 
 -(void)saveEventToCalendar;
+-(void)shareFacebookButton;
 
 @end
