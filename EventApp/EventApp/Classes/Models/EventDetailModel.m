@@ -70,7 +70,7 @@
     NSString *dateAsStringStart = [dataFormatter stringFromDate:startTime];
     NSString *link = self.event.linkHref;
     NSString *message =[NSString
-                        stringWithFormat:@"Event %@ start from %@ to %@ %@"
+                        stringWithFormat:@"Check this event out %@ %@ - %@ %@ in SF Bay Area via BayAreaStartupEvents.com app"
                         ,title,dateAsStringStart,dateAsStringEnd,link];
     
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
