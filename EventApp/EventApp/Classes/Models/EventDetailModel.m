@@ -60,18 +60,16 @@
 - (void)shareFacebookButton{
     NSString *title = self.event.titleName;
     NSDate *startTime = self.event.eventStartTime;
-    NSDate *endTime = self.event.eventEndTime;
     NSDateFormatter *dataFormatter = [[NSDateFormatter alloc]init];
     [dataFormatter setDateFormat:FORMAT_DATE];
     
     [dataFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dataFormatter setTimeStyle:NSDateFormatterShortStyle];
-    NSString *dateAsStringEnd = [dataFormatter stringFromDate:endTime];
     NSString *dateAsStringStart = [dataFormatter stringFromDate:startTime];
     NSString *link = self.event.linkHref;
     NSString *message =[NSString
-                        stringWithFormat:@"Check this event out %@ %@ - %@ %@ in SF Bay Area via BayAreaStartupEvents.com app"
-                        ,title,dateAsStringStart,dateAsStringEnd,link];
+                        stringWithFormat:@"Check this event out %@ %@ %@ in SF Bay Area via BayAreaStartupEvents.com app"
+                        ,title,dateAsStringStart,link];
     
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         
