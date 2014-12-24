@@ -68,10 +68,10 @@
     [dataFormatter setTimeStyle:NSDateFormatterShortStyle];
     NSString *dateAsStringEnd = [dataFormatter stringFromDate:endTime];
     NSString *dateAsStringStart = [dataFormatter stringFromDate:startTime];
-    NSString *location = self.event.eventWhere;
+    NSString *link = self.event.linkHref;
     NSString *message =[NSString
-                        stringWithFormat:@"Event %@ start from %@ to %@ at %@"
-                        ,title,dateAsStringStart,dateAsStringEnd,location];
+                        stringWithFormat:@"Event %@ start from %@ to %@ %@"
+                        ,title,dateAsStringStart,dateAsStringEnd,link];
     
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         
