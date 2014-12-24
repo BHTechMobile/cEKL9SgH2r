@@ -129,9 +129,8 @@
         NSDateFormatter *endDateFormatter = [[NSDateFormatter alloc] init];
 
         
-        [startDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:(NSInteger)((*timeZone).floatValue*3600)]];
-        [endDateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:(NSInteger)((*timeZone).floatValue*3600)]];
-
+        [startDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"Pacific Standard Time"]];
+        [endDateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"Pacific Standard Time"]];
         if (!([startTimeString rangeOfString:@":"].location == NSNotFound)) {
             [startDateFormatter setDateFormat:FORMAT_DATE];
         }
