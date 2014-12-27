@@ -199,6 +199,7 @@
             cell = [[EventDescriptionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:EventDescriptionTableViewCell_ID];
         }
         cell.contentDescriptionLabel.text = TITLE_DESCRIPTION;
+        cell.contentDescription.textContainer.lineBreakMode = NSLineBreakByTruncatingTail;
         [cell.contentDescription setText:[NSString stringWithFormat:@"%@",self.event.contentDescription]];
         
         [cell.contentDescription sizeToFit];
