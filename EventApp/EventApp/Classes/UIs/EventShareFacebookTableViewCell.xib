@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
@@ -14,21 +14,36 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="881-xd-nVK">
-                        <rect key="frame" x="13" y="8" width="295" height="54"/>
-                        <state key="normal" backgroundImage="sharefb.png">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share_on_facebook.png" translatesAutoresizingMaskIntoConstraints="NO" id="1zF-5k-lRa">
+                        <rect key="frame" x="35" y="12" width="250" height="44"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="881-xd-nVK" userLabel="Share - Button">
+                        <rect key="frame" x="35" y="12" width="250" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="BKp-Ii-pqH"/>
+                            <constraint firstAttribute="width" constant="250" id="okM-v5-nta"/>
+                        </constraints>
+                        <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="1zF-5k-lRa" firstAttribute="centerX" secondItem="881-xd-nVK" secondAttribute="centerX" id="3lO-A9-UUI"/>
+                    <constraint firstItem="1zF-5k-lRa" firstAttribute="width" secondItem="881-xd-nVK" secondAttribute="width" id="Cgt-Xw-opt"/>
+                    <constraint firstItem="1zF-5k-lRa" firstAttribute="centerY" secondItem="881-xd-nVK" secondAttribute="centerY" id="VMA-oB-lu0"/>
+                    <constraint firstItem="1zF-5k-lRa" firstAttribute="height" secondItem="881-xd-nVK" secondAttribute="height" id="aco-XI-gc3"/>
+                    <constraint firstAttribute="centerX" secondItem="881-xd-nVK" secondAttribute="centerX" id="ft5-8R-hF6"/>
+                    <constraint firstAttribute="centerY" secondItem="881-xd-nVK" secondAttribute="centerY" id="mPk-JC-o1V"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="sharefbButton" destination="881-xd-nVK" id="OTm-OF-09O"/>
             </connections>
-            <point key="canvasLocation" x="140" y="146"/>
+            <point key="canvasLocation" x="137.5" y="146"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="sharefb.png" width="145" height="26"/>
+        <image name="share_on_facebook.png" width="512" height="93"/>
     </resources>
 </document>

@@ -66,9 +66,9 @@
     [dataFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dataFormatter setTimeStyle:NSDateFormatterShortStyle];
     NSString *dateAsStringStart = [dataFormatter stringFromDate:startTime];
-    NSString *link = self.event.linkHref;
+    NSString *link = [self.class getLinkFromDescription:self.event.contentDescription];
     NSString *message =[NSString
-                        stringWithFormat:@"Check this event out %@ %@ %@ in SF Bay Area via BayAreaStartupEvents.com app"
+                        stringWithFormat:@"Check this event out %@ %@ %@ in SF Bay Area via @sfbaseapp (http://twitter.com/sfbaseapp)"
                         ,title,dateAsStringStart,link];
     
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
@@ -112,6 +112,7 @@
         [alert show];
     }
 }
+
 #pragma mark - Alert View delegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -121,12 +122,32 @@
         [[UIApplication sharedApplication] openURL:[NSURL  URLWithString:UIApplicationOpenSettingsURLString]];
     }
 }
-#pragma mark-Show Messages
+
+#pragma mark - Show Messages
 
 -(void)showMessage:(NSString*)message{
     dispatch_async(dispatch_get_main_queue(), ^{
         [[[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
     });
+}
+
+#pragma mark - Custom Methods
+
++ (NSString *)getLinkFromDescription:(NSString *)description
+{
+    NSString *result = @"";
+    NSArray *descriptionArray = [description componentsSeparatedByString:@"Link: "];
+    if (descriptionArray.count > 0) {
+        NSString *linkFound = [descriptionArray lastObject];
+        if (linkFound.length > 10) {
+            result = linkFound;
+        }else {
+            return @"";
+        }
+    }else {
+        result = @"";
+    }
+    return result;
 }
 
 @end

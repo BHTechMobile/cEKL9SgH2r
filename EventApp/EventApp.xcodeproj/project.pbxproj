@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04D812B21A4D737D00867C15 /* share_on_facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D812B11A4D737D00867C15 /* share_on_facebook@2x.png */; };
 		643017961A416A8400CDAC85 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 643017951A416A8400CDAC85 /* facebook@2x.png */; };
 		6430179A1A416C7C00CDAC85 /* EventShareFacebookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 643017981A416C7C00CDAC85 /* EventShareFacebookTableViewCell.m */; };
 		6430179B1A416C7C00CDAC85 /* EventShareFacebookTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 643017991A416C7C00CDAC85 /* EventShareFacebookTableViewCell.xib */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04D812B11A4D737D00867C15 /* share_on_facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_on_facebook@2x.png"; sourceTree = "<group>"; };
 		06E92D15D571D92AA76A698C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		643017951A416A8400CDAC85 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
 		643017971A416C7C00CDAC85 /* EventShareFacebookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventShareFacebookTableViewCell.h; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 		CE895CFA1A199B1200B0E6BB /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				04D812B11A4D737D00867C15 /* share_on_facebook@2x.png */,
 				643017A21A4180CD00CDAC85 /* sharefb@2x.png */,
 				643017951A416A8400CDAC85 /* facebook@2x.png */,
 				DD2804CE1A3705C100CC7FC4 /* iTunesArtwork@2x.png */,
@@ -397,6 +400,7 @@
 				DD2804CF1A3705C100CC7FC4 /* iTunesArtwork@2x.png in Resources */,
 				6430179B1A416C7C00CDAC85 /* EventShareFacebookTableViewCell.xib in Resources */,
 				CE895CE01A199AA500B0E6BB /* LaunchScreen.xib in Resources */,
+				04D812B21A4D737D00867C15 /* share_on_facebook@2x.png in Resources */,
 				CEC6A3851A242FC00023B98E /* EventDetailTableViewCell.xib in Resources */,
 				CEC6A3861A242FC00023B98E /* EventListTableViewCell.xib in Resources */,
 				643017961A416A8400CDAC85 /* facebook@2x.png in Resources */,
