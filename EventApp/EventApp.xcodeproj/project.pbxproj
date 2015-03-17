@@ -599,7 +599,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tran Vu Viet Anh (N2AZ5MXD3Y)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tran Vu Viet Anh (N2AZ5MXD3Y)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -610,7 +610,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7e8480ee-1ae2-44f1-a8d4-739a4384120b";
+				PROVISIONING_PROFILE = "2a79fece-1773-4498-884b-b1173a55f660";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -621,7 +621,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Tran Vu Viet Anh (N2AZ5MXD3Y)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tran Vu Viet Anh (N2AZ5MXD3Y)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -632,7 +632,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7e8480ee-1ae2-44f1-a8d4-739a4384120b";
+				PROVISIONING_PROFILE = "2a79fece-1773-4498-884b-b1173a55f660";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
