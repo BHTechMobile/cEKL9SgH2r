@@ -56,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		04D812B11A4D737D00867C15 /* share_on_facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_on_facebook@2x.png"; sourceTree = "<group>"; };
+		04F2837F1AF872CD00B3546A /* ErrorCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ErrorCodes.h; sourceTree = "<group>"; };
 		06E92D15D571D92AA76A698C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		643017951A416A8400CDAC85 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
 		643017971A416C7C00CDAC85 /* EventShareFacebookTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventShareFacebookTableViewCell.h; sourceTree = "<group>"; };
@@ -222,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				CEC6A3AC1A24303F0023B98E /* Constants.h */,
+				04F2837F1AF872CD00B3546A /* ErrorCodes.h */,
 				CEC6A3A21A2430370023B98E /* Controllers */,
 				CE895CF61A199B0700B0E6BB /* Categories */,
 				CE895CF71A199B0700B0E6BB /* Models */,
