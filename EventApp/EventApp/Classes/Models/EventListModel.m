@@ -10,6 +10,7 @@
 #import "EventListTableViewCell.h"
 #import "JSONLoader.h"
 #import "CoreDataHelpers.h"
+#import "ErrorCodes.h"
 
 @implementation EventListModel
 
@@ -68,8 +69,16 @@
     [JSONLoader requestDataSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         dispatch_async(dispatch_get_main_queue(), ^{
             _arrayEvents = [self convertData:[[responseObject valueForKey:@"feed"] valueForKey:@"entry"]];
-            if (success) {
-                success();
+            if (_arrayEvents.count < 1) {
+                if (failure) {
+                    failure([NSError errorWithDomain:@"Get latest events" code:NO_MORE_FUTURE_EVENTS userInfo:@{NSLocalizedDescriptionKey:@"There is no future events in the package!"}]);
+                }
+            }
+            else{
+                
+                if (success) {
+                    success();
+                }
             }
             NSError *error = nil;
             if (![EAManagedObjectContext save:&error]) {
@@ -248,7 +257,7 @@
                                                                                      EA_KEY_EVENT_END_TIME:endDate,
                                                                                      EA_KEY_EVENT_START_TIME:startDate
                                                                                      }];
-        [events addObject:eventDetail];
+        [events insertObject:eventDetail atIndex:0];
     }
     return events;
    

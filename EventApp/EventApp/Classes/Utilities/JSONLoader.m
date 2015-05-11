@@ -6,7 +6,8 @@
 
 #import "JSONLoader.h"
 /*&prettyprint=true*/
-#define URLJSON @"https://www.google.com/calendar/feeds/calendars@startupdigest.com/public/basic?alt=json&max-results=1000&start-index=1500&orderby=starttime&sortorder=a&hl=en"
+//#define URLJSON @"https://www.google.com/calendar/feeds/calendars@startupdigest.com/public/basic?alt=json&max-results=1000&start-index=1500&orderby=starttime&sortorder=d&hl=en"
+#define URLJSON @"https://www.google.com/calendar/feeds/calendars@startupdigest.com/public/basic?alt=json&max-results=1000&orderby=starttime&sortorder=d&hl=en"
 
 @implementation JSONLoader
 +(AFHTTPRequestOperationManager*)sharedManager{

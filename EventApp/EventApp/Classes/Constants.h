@@ -32,7 +32,7 @@
 #define EA_KEY_EVENT_STORE_ID @"eventStoreId"
 
 #define CIDS_MAIN_KEY @"cids"
-#define CALENDAR_EMBED_MAIN_KEY @"calendars%40startupdigest.com/private/embed"
+#define CALENDAR_EMBED_MAIN_KEY @"feed"//calendars%40startupdigest.com"//private/embed"
 #define GDATA_MAIN_KEY @"gdata"
 #define FEED_MAIN_KEY @"feed"
 #define TITLE_MAIN_KEY @"title"
